@@ -2,87 +2,69 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Explore Nigeria - About Us</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
   </head>
   <body>
-    <!-- Header -->
-    <header class="site-header">
-      <div class="container header-container">
-        <div class="logo">
-          <h1>Explore Nigeria</h1>
-        </div>
-        <!-- Hamburger icon for mobile -->
-        <div class="hamburger" id="hamburger">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-        </div>
-        <nav class="nav" id="nav-menu">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="destinations.html">Destinations</a></li>
-            <li class="active"><a href="about.html">About Us</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container">
-      <h2>Meet Our Team</h2>
-      <section class="team-grid">
-        <!-- Team Member 1 -->
-        <div class="team-member">
-          <img src="images/member1.jpg" alt="Sarah Ade" />
-          <h3>Sarah Ade</h3>
-          <p>Founder & CEO</p>
-          <p>Email: sarah@example.com</p>
-        </div>
-        <!-- Team Member 2 -->
-        <div class="team-member">
-          <img src="images/member2.jpg" alt="Chinedu Okafor" />
-          <h3>Chinedu Okafor</h3>
-          <p>Marketing Manager</p>
-          <p>Email: chinedu@example.com</p>
-        </div>
-        <!-- Team Member 3 -->
-        <div class="team-member">
-          <img src="images/member3.jpg" alt="Amina Bello" />
-          <h3>Amina Bello</h3>
-          <p>Content Strategist</p>
-          <p>Email: amina@example.com</p>
-        </div>
-      </section>
-
-      <section class="contact-info">
-        <h3>Further Enquiries</h3>
-        <p>Phone: +234-123-4567</p>
-        <p>Email: contact@explorenigeria.com</p>
-        <div class="social-links">
-          <a href="#">Facebook</a> | <a href="#">Twitter</a> |
-          <a href="#">Instagram</a>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer-links">
+    <header>
+      <nav>
+        <!--Nav links and logo goes here-->
+        <div class="logo"><a href="index.html">Explore Nigeria</a></div>
+        <div class="nav-links">
           <a href="index.html">Home</a>
           <a href="destinations.html">Destinations</a>
+          <a href="about.html" class="active">About Us</a>
         </div>
-        <div class="footer-social">
-          <a href="#">Facebook</a>
-          <a href="#">Twitter</a>
-          <a href="#">Instagram</a>
-        </div>
-        <p>&copy; 2023 Explore Nigeria. All rights reserved.</p>
-      </div>
-    </footer>
+      </nav>
+      <!--Other header information goes here-->
+    </header>
 
-    <script src="script.js"></script>
+    <main>
+      <!--Main Content will go here-->
+    </main>
+
+    <footer>
+      <!--Footer stuff will go here-->
+      <section class="social">
+        <!--Social media icons-->
+        <a href="mailto:info@expnaija.com" class="social-icon" target="_blank" rel="noopener noreferrer" title="Email">
+          <ion-icon name="mail"></ion-icon>
+        </a>
+        <a href="tel:+2341234567890" class="social-icon" target="_blank" rel="noopener noreferrer" title="Phone">
+          <ion-icon name="call"></ion-icon>
+        </a>
+        <a href="https://www.instagram.com" class="social-icon" target="_blank" rel="noopener noreferrer" title="Instagram">
+          <ion-icon name="logo-instagram"></ion-icon>
+        </a>
+        <a href="https://www.tiktok.com/explore" class="social-icon" target="_blank" rel="noopener noreferrer" title="TikTok">
+          <ion-icon name="logo-tiktok"></ion-icon>
+        </a>
+        <a href="https://www.youtube.com" class="social-icon" target="_blank" rel="noopener noreferrer" title="YouTube">
+          <ion-icon name="logo-youtube"></ion-icon>
+        </a>
+        <a href="https://www.x.com" class="social-icon" target="_blank" rel="noopener noreferrer" title="X">
+          <ion-icon name="logo-x"></ion-icon>
+        </a>
+      </section>
+
+      <section class="footer-nav-links">
+        <a href="index.html">Home</a>
+          <a href="destinations.html">Destinations</a>
+          <a href="about.html">About Us</a>
+      </section>
+
+      <section class="copyright-info">
+        <!--Copyright stuff-->
+        <p>&copy;2025 Explore Nigeria | All rights reserved</p>
+      </section>
+    </footer>
+    <!--Using a script tag to import a library of icons instead of using the svg tags, the two tags are there to accomodate for both old and new browsers-->
+    <script type="module" src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.js"></script>
   </body>
 </html>

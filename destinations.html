@@ -2,109 +2,69 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Explore Nigeria - Destinations</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Destinations</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
   </head>
   <body>
-    <!-- Header -->
-    <header class="site-header">
-      <div class="container header-container">
-        <div class="logo">
-          <h1>Explore Nigeria</h1>
-        </div>
-        <!-- Hamburger icon for mobile -->
-        <div class="hamburger" id="hamburger">
-          <div class="bar"></div>
-          <div class="bar"></div>
-          <div class="bar"></div>
-        </div>
-        <nav class="nav" id="nav-menu">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li class="active"><a href="destinations.html">Destinations</a></li>
-            <li><a href="about.html">About Us</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="container">
-      <h2>Explore the Beauty of Nigeria</h2>
-
-      <!-- Grid layout for destinations -->
-      <section class="destinations-grid">
-        <!-- Destination Item -->
-        <div class="destination-item">
-          <img src="images/obudu.jpg" alt="Obudu Mountain Resort" />
-          <h3>Obudu Mountain Resort</h3>
-          <p>An elegant mountain resort with breathtaking landscapes.</p>
-          <button class="map-btn" data-location="Obudu Mountain Resort">
-            View on Map
-          </button>
-        </div>
-        <div class="destination-item">
-          <img src="images/yankari.jpg" alt="Yankari Game Reserve" />
-          <h3>Yankari Game Reserve</h3>
-          <p>Experience wildlife and scenic nature at its finest.</p>
-          <button class="map-btn" data-location="Yankari Game Reserve">
-            View on Map
-          </button>
-        </div>
-        <div class="destination-item">
-          <img src="images/olumo.jpg" alt="Olumo Rock" />
-          <h3>Olumo Rock</h3>
-          <p>Historic rock formations with a panoramic view of the city.</p>
-          <button class="map-btn" data-location="Olumo Rock">
-            View on Map
-          </button>
-        </div>
-        <div class="destination-item">
-          <img src="images/nikeart.jpg" alt="Nike Art Gallery" />
-          <h3>Nike Art Gallery</h3>
-          <p>A vibrant showcase of Nigerian art and culture.</p>
-          <button class="map-btn" data-location="Nike Art Gallery">
-            View on Map
-          </button>
-        </div>
-      </section>
-
-      <!-- Embedded Map Section (hidden by default) -->
-      <section id="map-section" class="map-section hidden">
-        <button id="back-btn" class="btn">&larr; Back to Destinations</button>
-        <div id="map-container">
-          <!-- Simple Google map embed. Replace with proper embed or API key as necessary -->
-          <iframe
-            id="map-frame"
-            src=""
-            width="100%"
-            height="450"
-            frameborder="0"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-          ></iframe>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer-links">
+    <header>
+      <nav>
+        <!--Nav links and logo goes here-->
+        <div class="logo"><a href="index.html">Explore Nigeria</a></div>
+        <div class="nav-links">
           <a href="index.html">Home</a>
+          <a href="destinations.html" class="active">Destinations</a>
           <a href="about.html">About Us</a>
         </div>
-        <div class="footer-social">
-          <a href="#">Facebook</a>
-          <a href="#">Twitter</a>
-          <a href="#">Instagram</a>
-        </div>
-        <p>&copy; 2023 Explore Nigeria. All rights reserved.</p>
-      </div>
-    </footer>
+      </nav>
+      <!--Other header information goes here-->
+    </header>
 
-    <script src="script.js"></script>
+    <main>
+      <!--Main Content will go here-->
+    </main>
+
+    <footer>
+      <!--Footer stuff will go here-->
+      <section class="social">
+        <!--Social media icons-->
+        <a href="mailto:info@expnaija.com" class="social-icon" target="_blank" rel="noopener noreferrer" title="Email">
+          <ion-icon name="mail"></ion-icon>
+        </a>
+        <a href="tel:+2341234567890" class="social-icon" target="_blank" rel="noopener noreferrer" title="Phone">
+          <ion-icon name="call"></ion-icon>
+        </a>
+        <a href="https://www.instagram.com" class="social-icon" target="_blank" rel="noopener noreferrer" title="Instagram">
+          <ion-icon name="logo-instagram"></ion-icon>
+        </a>
+        <a href="https://www.tiktok.com/explore" class="social-icon" target="_blank" rel="noopener noreferrer" title="TikTok">
+          <ion-icon name="logo-tiktok"></ion-icon>
+        </a>
+        <a href="https://www.youtube.com" class="social-icon" target="_blank" rel="noopener noreferrer" title="YouTube">
+          <ion-icon name="logo-youtube"></ion-icon>
+        </a>
+        <a href="https://www.x.com" class="social-icon" target="_blank" rel="noopener noreferrer" title="X">
+          <ion-icon name="logo-x"></ion-icon>
+        </a>
+      </section>
+
+      <section class="footer-nav-links">
+        <a href="index.html">Home</a>
+          <a href="destinations.html">Destinations</a>
+          <a href="about.html">About Us</a>
+      </section>
+
+      <section class="copyright-info">
+        <!--Copyright stuff-->
+        <p>&copy;2025 Explore Nigeria | All rights reserved</p>
+      </section>
+    </footer>
+    <!--Using a script tag to import a library of icons instead of using the svg tags, the two tags are there to accomodate for both old and new browsers-->
+    <script type="module" src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.js"></script>
   </body>
 </html>
