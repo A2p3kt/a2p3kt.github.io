@@ -113,7 +113,7 @@ nav {
   align-items: center;
   text-align: center;
   background-color: var(--section-bg);
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 1rem auto;
   padding: 2rem;
   border-radius: 10px;
@@ -126,9 +126,10 @@ nav {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minimax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 20px;
+  grid-auto-rows: min-content;
 }
 
 .grid-item {
@@ -141,20 +142,31 @@ nav {
   text-align: center;
 }
 
-.grid-item img {
-  display: block;
-  border-radius: 10px;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
 .grid-item h4 {
   margin: 10px 0;
 }
 
 .grid-item p {
   font-style: italic;
+}
+
+.image-container {
+  border-radius: 10px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.image-container img, 
+.grid-item img {
+  display: block;
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+  transition: 0.4s ease;
+}
+
+.image-container:hover img {
+  transform: scale(1.1);
 }
 
 /* Call to action button styling */
@@ -236,10 +248,8 @@ ion-icon {
   opacity: 0.3;
 }
 
-@media (min-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+iframe {
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -248,5 +258,10 @@ ion-icon {
     justify-content: center;
     align-items: center;
     gap: 20px;
+  }
+
+  .grid {
+    display: flex;
+    flex-direction: column;
   }
 }
