@@ -43,7 +43,7 @@ nav {
 .nav-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 1.5rem;
   align-items: center;
 }
 
@@ -72,12 +72,11 @@ nav {
   align-items: center;
   text-align: center;
   gap: 20px;
-  height: 70vh;
+  height: 60vh;
   position: relative;
   margin: 1rem;
   border-radius: 10px;
   color: white;
-  overflow: hidden;
 }
 
 /* Overlay effect to darken the hero image (AI assisted) */
@@ -179,17 +178,23 @@ nav {
 }
 
 .grid-item a {
-  color: var(--primary-color);
+  color: white;
+  background-color: var(--primary-color);
+  max-width: max-content;
+  width: 100%;
+  padding: 0.4rem;
+  border-radius: 5px;
   text-decoration: none;
-  transition: text-decoration 0.5s ease;
+  align-self: flex-end;
+  transition: background-color 0.5s ease;
+}
+
+.grid-item a:hover {
+  background-color: #005d00;
 }
 
 .grid.staff {
   grid-template-columns: repeat(3, 1fr);
-}
-
-.grid-item a:hover {
-  text-decoration: underline;
 }
 
 .image-container {
@@ -231,9 +236,7 @@ nav {
   width: 50%;
 }
 
-.contact-form div:last-child {
-  align-items: center;
-}
+
 
 .contact-form div label {
   text-align: left;
@@ -268,6 +271,7 @@ nav {
   border-radius: 8px;
   cursor: pointer;
   display: inline-block;
+  align-self: center;
   max-width: max-content;
   width: 100%;
   font-family: Montserrat;
@@ -377,6 +381,14 @@ iframe {
     justify-content: center;
     align-items: center;
     gap: 20px;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .logo a {
+    font-size: 30px;
   }
 
   .grid {
