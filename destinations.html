@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Destinations</title>
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- To add an icon on the title bar in the browser after loading -->
+    <link rel="apple-touch-icon" sizes="180x180" href="styles/images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="styles/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="styles/images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="styles/images/favicon_io/site.webmanifest">
   </head>
   <body>
     <header>
@@ -35,181 +40,187 @@
 
       <section class="content">
         <!--Grid of Destinations go here-->
-        <h3>Where will your travels take you?</h3>
+        <h2>Where will your travels take you?</h2>
 
         <div class="grid">
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/aro-meta-lagos.jpg" alt="Welcome to Lagos statue">
+              <img src="styles/images/destinations/aro-meta-lagos.jpg" alt="Welcome to Lagos statue" loading="lazy">
             </div>
-            <h4>Symbol of Arrival</h4>
+            <h3>Symbol of Arrival</h3>
             <p>The iconic ‘Welcome to Lagos’ statue stands tall, offering a warm embrace to newcomers while representing the city’s energy and cultural richness.</p>
             <a href="#" onclick="showOnMap('lagos three wise men statue'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/aso-rock.jpg" alt="Aso rock">
+              <img src="styles/images/destinations/aso-rock.jpg" alt="Aso rock" loading="lazy">
             </div>
-            <h4>The Rock of Power</h4>
+            <h3>The Rock of Power</h3>
             <p>Aso Rock, a monumental natural formation, watches over Abuja and serves as a symbolic backdrop to Nigeria’s seat of political leadership.</p>
             <a href="#" onclick="showOnMap('aso rock'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/cathedral-church-of-christ.png" alt="Cathedral church of christ lagos">
+              <img src="styles/images/destinations/cathedral-church-of-christ.png" alt="Cathedral church of christ lagos" loading="lazy">
             </div>
-            <h4>Sanctuary in the City</h4>
+            <h3>Sanctuary in the City</h3>
             <p>With its towering spires and colonial charm, the Cathedral Church of Christ is a serene refuge in the bustling heart of Lagos Island.</p>
             <a href="#" onclick="showOnMap('Cathedral Church of Christ, Marina'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/central-bank-of-nigeria.png" alt="the central bank of nigeria">
+              <img src="styles/images/destinations/central-bank-of-nigeria.png" alt="the central bank of nigeria" loading="lazy">
             </div>
-            <h4>Heart of the Economy</h4>
+            <h3>Heart of the Economy</h3>
             <p>The Central Bank of Nigeria stands as a pillar of national finance, orchestrating the monetary rhythm of Africa’s largest economy.</p>
             <a href="#" onclick="showOnMap('central bank of nigeria abuja'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/durbar-festival.jpg" alt="durbar festival">
+              <img src="styles/images/destinations/durbar-festival.jpg" alt="durbar festival" loading="lazy">
             </div>
-            <h4>Royal Parade of the North</h4>
+            <h3>Royal Parade of the North</h3>
             <p>Held with regal splendor, the Durbar Festival bursts with color, horsemanship, and tradition in celebration of Northern Nigeria’s royal heritage.</p>
             <a href="https://en.wikipedia.org/wiki/Durbar_festival" target="_blank">Learn More</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/ebute-metta-train-station.jpg" alt="ebute metta train station">
+              <img src="styles/images/destinations/ebute-metta-train-station.jpg" alt="ebute metta train station" loading="lazy">
             </div>
-            <h4>Tracks of Progress</h4>
+            <h3>Tracks of Progress</h3>
             <p>The modern Ebute Metta Train Station is a hub of transformation, linking Lagos with other key cities through sleek, high-speed rail lines.</p>
             <a href="#" onclick="showOnMap('mobolaji johnson train station'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/gurara-falls-niger.jpg" alt="gurara falls niger">
+              <img src="styles/images/destinations/gurara-falls-niger.jpg" alt="gurara falls niger" loading="lazy">
             </div>
-            <h4>Majestic Waters of Gurara</h4>
+            <h3>Majestic Waters of Gurara</h3>
             <p>Gurara Falls crashes down ancient rocks with mighty force, carving out a scenic masterpiece that dazzles visitors in Niger State.</p>
             <a href="#" onclick="showOnMap('gurara waterfalls'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/house-of-assembly.png" alt="house of assembly">
+              <img src="styles/images/destinations/house-of-assembly.png" alt="house of assembly" loading="lazy">
             </div>
-            <h4>Where Laws Are Made</h4>
+            <h3>Where Laws Are Made</h3>
             <p>The Nigerian House of Assembly in Abuja serves as the nation’s legislative engine, shaping the legal and democratic landscape of the country.</p>
             <a href="#" onclick="showOnMap('national assembly of nigeria'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/idanre-hills.png" alt="idanre hills">
+              <img src="styles/images/destinations/idanre-hills.png" alt="idanre hills" loading="lazy">
             </div>
-            <h4>Stairway to Legends</h4>
+            <h3>Stairway to Legends</h3>
             <p>With winding steps and ancient relics, the mystical Idanre Hills blend awe-inspiring views with centuries-old Yoruba folklore.</p>
             <a href="#" onclick="showOnMap('idanre hills'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/lekki-conservation-center.jpg" alt="lekki conservation center">
+              <img src="styles/images/destinations/lekki-conservation-center.jpg" alt="lekki conservation center" loading="lazy">
             </div>
-            <h4>Green Escape in the City</h4>
+            <h3>Green Escape in the City</h3>
             <p>Home to Africa’s longest canopy walk, the Lekki Conservation Centre is a lush sanctuary teeming with monkeys, birds, and peace.</p>
             <a href="#" onclick="showOnMap('lekki conservation center'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/millenium-park-abuja.jpg" alt="millenium park abuja">
+              <img src="styles/images/destinations/millenium-park-abuja.jpg" alt="millenium park abuja" loading="lazy">
             </div>
-            <h4>Urban Oasis</h4>
+            <h3>Urban Oasis</h3>
             <p>Millennium Park offers a breath of fresh air in the capital, with winding paths, open fields, and a relaxing environment for families and nature lovers alike.</p>
             <a href="#" onclick="showOnMap('millennium park abuja'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/National-Arts-Theatre.png" alt="national theatre of arts">
+              <img src="styles/images/destinations/National-Arts-Theatre.png" alt="national theatre of arts" loading="lazy">
             </div>
-            <h4>Stage of Nigerian Culture</h4>
+            <h3>Stage of Nigerian Culture</h3>
             <p>The National Arts Theatre in Lagos is an architectural marvel and cultural powerhouse where Nigeria’s performing arts come alive.</p>
             <a href="#" onclick="showOnMap('national theatre nigeria'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/National-Church.jpg" alt="National ecumenical center">
+              <img src="styles/images/destinations/National-Church.jpg" alt="National ecumenical center" loading="lazy">
             </div>
-            <h4>Unity in Worship</h4>
+            <h3>Unity in Worship</h3>
             <p>The National Ecumenical Centre symbolizes interdenominational unity, standing tall with breathtaking design and spiritual openness in Abuja.</p>
             <a href="#" onclick="showOnMap('national ecumenical center abuja'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/nike-art-gallery-lagos.jpg" alt="nike art gallery lagos">
+              <img src="styles/images/destinations/nike-art-gallery-lagos.jpg" alt="nike art gallery lagos" loading="lazy">
             </div>
-            <h4>Canvas of Culture</h4>
+            <h3>Canvas of Culture</h3>
             <p>The Nike Art Gallery in Lagos bursts with vibrant creativity, housing thousands of works that reflect Nigeria’s diverse artistic heritage.</p>
             <a href="#" onclick="showOnMap('nike art gallery'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/obudu-mountain-resort.png" alt="obudu mountain resort">
+              <img src="styles/images/destinations/obudu-mountain-resort.png" alt="obudu mountain resort" loading="lazy">
             </div>
-            <h4>Chill on the Plateau</h4>
+            <h3>Chill on the Plateau</h3>
             <p>Obudu Mountain Resort is a highland paradise of rolling fog, cable cars, and breathtaking views nestled in the Cross River highlands.</p>
             <a href="#" onclick="showOnMap('obudu mountain resort'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/ushafa-crushed-rock.jpg" alt="ushafa crushed rocks">
+              <img src="styles/images/destinations/ushafa-crushed-rock.jpg" alt="ushafa crushed rocks" loading="lazy">
             </div>
-            <h4>Hidden Blues of Ushafa</h4>
+            <h3>Hidden Blues of Ushafa</h3>
             <p>Once a quarry, the Ushafa Crushed Rock site now stuns with sapphire-blue waters surrounded by rugged cliffs and local serenity in Abuja.</p>
             <a href="#" onclick="showOnMap('ushafa crush rocks'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/zuma-rock.png" alt="zuma rock">
+              <img src="styles/images/destinations/zuma-rock.png" alt="zuma rock" loading="lazy">
             </div>
-            <h4>Face of the Nation</h4>
+            <h3>Face of the Nation</h3>
             <p>Visible from miles away, Zuma Rock is a majestic monolith etched with a natural human face, guarding the entrance to the capital from Niger State.</p>
             <a href="#" onclick="showOnMap('zuma rock'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/agbokim-waterfalls.png" alt="agbokim waterfalls">
+              <img src="styles/images/destinations/agbokim-waterfalls.png" alt="agbokim waterfalls" loading="lazy">
             </div>
-            <h4>Sevenfold Wonder of the East</h4>
+            <h3>Sevenfold Wonder of the East</h3>
             <p>Agbokim Waterfalls, nestled in Cross River State, cascades through seven distinct streams, creating a mesmerizing symphony of sound and mist in the heart of lush rainforest.</p>
             <a href="#" onclick="showOnMap('agbokim waterfalls'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/national-mosque-abuja.jpg" alt="national mosque abuja">
+              <img src="styles/images/destinations/national-mosque-abuja.jpg" alt="national mosque abuja" loading="lazy">
             </div>
-            <h4>Minarets of Peace</h4>
+            <h3>Minarets of Peace</h3>
             <p>With its golden dome and elegant minarets, the National Mosque is a central beacon of Islamic faith and architectural grandeur in Nigeria’s capital.</p>
             <a href="#" onclick="showOnMap('national mosque abuja'); return false;">Show on map</a>
           </div>
           <div class="grid-item">
             <div class="image-container">
-              <img src="styles/images/destinations/erin-ijesha-falls.jpg" alt="erin ijesha falls">
+              <img src="styles/images/destinations/erin-ijesha-falls.jpg" alt="erin ijesha falls" loading="lazy">
             </div>
-            <h4>Nature’s Staircase</h4>
+            <h3>Nature’s Staircase</h3>
             <p>Erin Ijesha Falls tumbles down seven mystical levels, creating an enchanting landscape for hikers and nature lovers in Osun State.</p>
             <a href="#" onclick="showOnMap('erin ijesha waterfall'); return false;">Show on map</a>
           </div>
+        </div>
+
+        <!-- Fullscreen Preview Container -->
+        <div id="fullscreenPreview">
+          <img id="previewImage" src="#" alt="tbd">
         </div>
       </section>
 
       <section id="map-section" class="content">
         <!-- Embedded map goes here -->
+         <h2>Here's Where You'll Find It</h2>
         <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8070640.318471168!2d3.3744579684117224!3d8.99583992606316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e0baf7da48d0d%3A0x99a8fe4168c50bc8!2sNigeria!5e0!3m2!1sen!2sfi!4v1744673461367!5m2!1sen!2sfi" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </section>
     </main>
 
     <footer>
       <!--Footer stuff will go here-->
-      <section class="social">
+      <div class="social">
         <!--Social media icons-->
         <a href="mailto:info@expnaija.com" class="social-icon" target="_blank" rel="noopener noreferrer" title="Email">
           <ion-icon name="mail"></ion-icon>
@@ -229,18 +240,18 @@
         <a href="https://x.com/nigeriagov?lang=en" class="social-icon" target="_blank" rel="noopener noreferrer" title="X">
           <ion-icon name="logo-x"></ion-icon>
         </a>
-      </section>
+      </div>
 
-      <section class="footer-nav-links">
+      <div class="footer-nav-links">
         <a href="index.html">Home</a>
           <a href="destinations.html">Destinations</a>
           <a href="about.html">About Us</a>
-      </section>
+      </div>
 
-      <section class="copyright-info">
+      <div class="copyright-info">
         <!--Copyright stuff-->
         <p>&copy;2025 Explore Nigeria | All rights reserved</p>
-      </section>
+      </div>
     </footer>
     <!--Using a script tag to import a library of icons instead of using the svg tags, the two tags are there to accomodate for both old and new browsers-->
     <script type="module" src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>

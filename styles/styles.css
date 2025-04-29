@@ -1,11 +1,11 @@
-/* CSS reset */
+/* This is a simple CSS reset to remove default browser styles */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-/* Root styling colors */
+/* These are the colors used in the website and define the theme so that I can change them to whatever I want easily*/
 :root {
   --primary-color: #008000;
   --secondary-color: #ffd700;
@@ -25,18 +25,26 @@ body {
   font-family: Montserrat;
 }
 
+header {
+  background-color: var(--primary-color);
+  top: 0;
+  position: sticky; /* Makes sure the heaader and it's content stays in view always */
+  z-index: 3;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
   padding: 1.5rem;
-  background-color: var(--primary-color);
   width: 100%;
 }
 
 .logo a {
   color: white;
   font-size: 36px;
-  font-weight: 600;
+  font-weight: 700;
   font-family: Lato;
 }
 
@@ -49,6 +57,7 @@ nav {
 
 .nav-links a {
   color: white;
+  font-weight: 600;
   transition: transform 0.3s, color 0.3s;
 }
 
@@ -101,10 +110,13 @@ nav {
   padding: 0 2rem;
 }
 
+h1 {
+  font-size: 36px;
+}
+
 /* Main content section styling different from header slightly */
 .content.heading h1 {
   font-size: 36px;
-  margin-bottom: 1rem;
   color: var(--primary-color); /* if you've set one */
   font-weight: 700;
   line-height: 1.2;
@@ -112,10 +124,16 @@ nav {
 
 .content.heading p {
   font-size: 1rem;
+  text-align: center;
   max-width: 600px;
   margin: 0 auto;
   color: #555;
   line-height: 1.6;
+}
+
+.content.mission p,
+.content.mission ul {
+  align-self: flex-start;
 }
 
 .content {
@@ -123,7 +141,7 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  gap: 1rem;
   background-color: var(--section-bg);
   max-width: 95vw;
   margin: 1rem auto;
@@ -132,9 +150,8 @@ nav {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.content h3 {
+.content h2 {
   color: var(--primary-color);
-  margin-bottom: 1rem;
 }
 
 .grid {
@@ -164,7 +181,8 @@ nav {
   transition: 0.4s ease;
 }
 
-.grid-item h4 {
+.grid-item h3 {
+  font-size: medium;
   margin: 12px 16px 6px;
   font-weight: 600;
   color: var(--primary-color);
@@ -218,8 +236,34 @@ nav {
 }
 
 .big {
-  grid-column: span 2;
-  grid-row: span 2;
+  grid-column: span 2; /* Makes the image span two columns */
+  grid-row: span 2; /* Makes the image span two rows */
+}
+
+#fullscreenPreview {
+  display: none; /* Keep the preview hidden at first */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Makes sure that the preview takes up the entire viewport */
+  height: 100%;
+  background-color: rgba(0,0,0,0.9); /* Sets a dark background for the preview */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Makes sure the preview is on top of everything else */
+  animation: fadeIn 0.5s; /* Adds fade in effect for a better feel */
+}
+
+/* Actual fade in effect (AI assisted) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#previewImage {
+  max-width: 90%; /* Ensures the image doesn't overflow the viewport */
+  max-height: 90%;
+  border-radius: 5px; /* Adds sweet round edges to the images */
 }
 
 .contact-form {
@@ -227,7 +271,7 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 20px; 
 }
 
 .contact-form div {
@@ -315,11 +359,6 @@ footer {
   padding: 1.5rem 2rem;
 }
 
-footer section {
-  display: flex;
-}
-
-
 /* Styling of the social media icons in the footer */
 .social {
   display: flex;
@@ -336,8 +375,8 @@ footer section {
 }
 
 .social-icon:hover {
-  transform: translateY(-10px);
-  opacity: 1;
+  transform: translateY(-10px); /* Move the icon up on hover */
+  opacity: 1; /* Make it fully visible */
 }
 
 ion-icon {
@@ -387,7 +426,8 @@ iframe {
     gap: 1rem;
   }
 
-  .logo a {
+  .logo a,
+  h1 {
     font-size: 30px;
   }
 

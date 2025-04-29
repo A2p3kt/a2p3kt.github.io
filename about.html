@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- To add an icon on the title bar in the browser after loading -->
+    <link rel="apple-touch-icon" sizes="180x180" href="styles/images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="styles/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="styles/images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="styles/images/favicon_io/site.webmanifest">
   </head>
   <body>
     <header>
@@ -36,45 +41,50 @@
 
       <section class="content">
         <!-- Grid of staff goes here -->
-         <h3>Our Team, Your Guides</h3>
+         <h2>Our Team, Your Guides</h2>
 
          <div class="grid staff">
           <div class="grid-item">
-            <div class="image-container"><img src="styles/images/staff/samuel-ola.jpg" alt="portrait of a nigerian male"></div>
-            <h4>Samuel Oladimeji</h4>
+            <div class="image-container"><img src="styles/images/staff/samuel-ola.jpg" alt="portrait of a nigerian male" loading="lazy"></div>
+            <h3>Samuel Oladimeji</h3>
             <p>Managing Director / CEO</p>
           </div>
           <div class="grid-item">
-            <div class="image-container"><img src="styles/images/staff/amaka-chukwurah.jpg" alt="portrait of an animated black female"></div>
-            <h4>Amaka Chukwurah</h4>
+            <div class="image-container"><img src="styles/images/staff/amaka-chukwurah.jpg" alt="portrait of an nigerian female" loading="lazy"></div>
+            <h3>Amaka Chukwurah</h3>
             <p>Director of Operations</p>
           </div>
           <div class="grid-item">
-            <div class="image-container"><img src="styles/images/staff/bayo-makinde.jpg" alt="portrait of an animated black male"></div>
-            <h4>Bayo Makinde</h4>
+            <div class="image-container"><img src="styles/images/staff/bayo-makinde.jpg" alt="portrait of an nigerian male" loading="lazy"></div>
+            <h3>Bayo Makinde</h3>
             <p>Sales and Marketing Manager</p>
           </div>
           <div class="grid-item">
-            <div class="image-container"><img src="styles/images/staff/talatu-iliya.jpg" alt="portrait of an animated black female"></div>
-            <h4>Talatu Iliya</h4>
+            <div class="image-container"><img src="styles/images/staff/talatu-iliya.jpg" alt="portrait of an nigerian female" loading="lazy"></div>
+            <h3>Talatu Iliya</h3>
             <p>Client Services Manager</p>
           </div>
           <div class="grid-item">
-            <div class="image-container"><img src="styles/images/staff/timothy-oklobia.jpg" alt="portrait of an animated black male"></div>
-            <h4>Timothy Oklobia</h4>
+            <div class="image-container"><img src="styles/images/staff/timothy-oklobia.jpg" alt="portrait of an nigerian male" loading="lazy"></div>
+            <h3>Timothy Oklobia</h3>
             <p>Tour Development Manager</p>
           </div>
           <div class="grid-item">
-            <div class="image-container"><img src="styles/images/staff/yewande-koker.jpg" alt="portrait of an animated black female"></div>
-            <h4>Yewande Koker</h4>
+            <div class="image-container"><img src="styles/images/staff/yewande-koker.jpg" alt="portrait of an nigerian female" loading="lazy"></div>
+            <h3>Yewande Koker</h3>
             <p>Travel Advisor</p>
           </div>
+         </div>
+
+         <!-- Fullscreen Preview Container -->
+         <div id="fullscreenPreview">
+          <img id="previewImage" src="#" alt="tbd">
          </div>
       </section>
 
       <section class="content">
         <!-- Contact form will go here -->
-         <h3>Have Questions? Let's Talk</h3>
+         <h2>Have Questions? Let's Talk</h2>
 
          <form class="contact-form" action="#" method="post">
           <div>
@@ -98,7 +108,7 @@
 
     <footer>
       <!--Footer stuff will go here-->
-      <section class="social">
+      <div class="social">
         <!--Social media icons-->
         <a href="mailto:info@expnaija.com" class="social-icon" target="_blank" rel="noopener noreferrer" title="Email">
           <ion-icon name="mail"></ion-icon>
@@ -118,18 +128,18 @@
         <a href="https://x.com/nigeriagov?lang=en" class="social-icon" target="_blank" rel="noopener noreferrer" title="X">
           <ion-icon name="logo-x"></ion-icon>
         </a>
-      </section>
+      </div>
 
-      <section class="footer-nav-links">
+      <div class="footer-nav-links">
         <a href="index.html">Home</a>
           <a href="destinations.html">Destinations</a>
           <a href="about.html">About Us</a>
-      </section>
+      </div>
 
-      <section class="copyright-info">
+      <div class="copyright-info">
         <!--Copyright stuff-->
         <p>&copy;2025 Explore Nigeria | All rights reserved</p>
-      </section>
+      </div>
     </footer>
     <!--Using a script tag to import a library of icons instead of using the svg tags, the two tags are there to accomodate for both old and new browsers-->
     <script type="module" src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
