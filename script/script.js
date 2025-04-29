@@ -24,11 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //Changes the location on the map to be the location of the clicked image and scrolls the map into view.
 function showOnMap(location) {
-  let apiKey = CONFIG.API_KEY;
-
   const map = document.getElementById("map");
   const encodedLocation = encodeURIComponent(location);
-  map.src = `https://www.google.com/maps/embed/v1/place?q=${encodedLocation}&maptype=satellite&zoom=16&key=${apiKey}`;
+  map.src = `https://www.google.com/maps/embed/v1/place?q=${encodedLocation}&maptype=satellite&zoom=16&key=AIzaSyCDvkxRJOhNrcg6I1gHQsHFBnrl4coiwbs`;
 
   document.getElementById("map-section").scrollIntoView({ behavior: "smooth" }); // Defines the scroll animation behaviour
 }
