@@ -7,12 +7,12 @@
 
 /* These are the colors used in the website and define the theme so that I can change them to whatever I want easily*/
 :root {
-  --primary-color: #008000;
-  --secondary-color: #ffd700;
+  --primary-color: #005000;
+  --secondary-color: #FFEA00;
   --bg-color: #f0f0f0;
   --text-color: #333;
   --section-bg: #ffffff;
-  --footer-bg: #005700;
+  --footer-bg: #003800;
 }
 
 /* Remove all link decorations (it just looks bad) */
@@ -385,7 +385,8 @@ ion-icon {
 }
 
 .footer-nav-links {
-  gap: 15px;
+  display: flex;
+  gap: 1rem;
   flex-wrap: wrap;
   text-align: center;
 }
