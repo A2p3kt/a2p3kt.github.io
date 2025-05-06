@@ -387,6 +387,7 @@ ion-icon {
 }
 
 .footer-nav-links {
+  color: white;
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
