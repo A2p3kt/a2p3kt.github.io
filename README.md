@@ -14,7 +14,7 @@
 
 ### Purpose
 
-The website serves as a digital gateway to Nigeria, promoting tourism and cultural appreciation by highlighting various destinations, providing visual experiences, and offering contact information for potential visitors.
+The website serves as a digital gateway to Nigeria, promoting tourism and cultural appreciation by highlighting various destinations, providing visual experiences, and offering contact information for potential visitors. This site was created as my final assignment for my Digital Services Course in Haaga-Helia UAS
 
 ## Site Structure
 
