@@ -4,100 +4,415 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Helsinki Event Explorer | AWS Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         :root {
-            --primary: #002f6c;
-            --highlight: #ff4500;
-            --sidebar: 400px;
-            --bg: #f8fafc;
-            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --primary: #6c3ce0;
+            --primary-dark: #5428c8;
+            --primary-glow: rgba(108, 60, 224, 0.15);
+            --accent: #f97316;
+            --accent-soft: #fff7ed;
+            --surface: #ffffff;
+            --surface-alt: #faf9fc;
+            --border: #ede9f6;
+            --border-hover: #d4cceb;
+            --text: #1a1236;
+            --text-secondary: #6b6580;
+            --text-muted: #a098b0;
+            --sidebar-w: 390px;
+            --radius: 14px;
+            --radius-sm: 10px;
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; margin: 0; display: flex; height: 100vh; background: var(--bg); overflow: hidden; color: #1e293b; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Sidebar UI */
-        .sidebar { width: var(--sidebar); display: flex; flex-direction: column; background: white; border-right: 1px solid #e2e8f0; z-index: 20; box-shadow: 4px 0 15px rgba(0,0,0,0.03); }
-        .filter-header { padding: 1.5rem; background: #fff; border-bottom: 1px solid #e2e8f0; }
-        .event-list { flex: 1; overflow-y: auto; padding: 1rem; scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+            display: flex; height: 100vh; height: 100dvh;
+            background: #f4f2f8; overflow: hidden; color: var(--text);
+            -webkit-font-smoothing: antialiased;
+        }
 
-        /* Map UI */
-        .map-area { flex: 1; position: relative; }
+        /* ─────── SIDEBAR ─────── */
+        .sidebar {
+            width: var(--sidebar-w); min-width: var(--sidebar-w);
+            display: flex; flex-direction: column;
+            background: var(--surface); z-index: 20;
+            border-right: 1px solid var(--border);
+            transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+        }
+
+        .brand {
+            padding: 1.4rem 1.5rem 1rem;
+            background: linear-gradient(135deg, #6c3ce0 0%, #8b5cf6 100%);
+            color: white;
+        }
+        .brand h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800; font-size: 1.35rem;
+            letter-spacing: -0.03em;
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        .brand h2 .flag { font-size: 1.15rem; }
+        .brand p {
+            font-size: 0.75rem; opacity: 0.7; margin-top: 0.3rem;
+            font-weight: 500;
+        }
+
+        .filters {
+            padding: 1.1rem 1.3rem 0.6rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface-alt);
+        }
+
+        .control-group { margin-bottom: 0.85rem; }
+
+        label {
+            display: block; font-size: 0.65rem; font-weight: 700;
+            color: var(--text-muted); margin-bottom: 0.35rem;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        input[type="text"], select {
+            width: 100%; padding: 0.6rem 0.8rem;
+            border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+            font-size: 0.84rem; transition: all 0.2s var(--ease);
+            background: var(--surface); font-family: inherit;
+            color: var(--text);
+        }
+        input[type="text"]:focus, select:focus {
+            border-color: var(--primary); outline: none;
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+        input[type="text"]::placeholder { color: #c5bdd4; }
+
+        select {
+            cursor: pointer; appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23a098b0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.7rem center;
+            padding-right: 2rem;
+        }
+
+        input[type="range"] {
+            width: 100%; accent-color: var(--primary);
+            cursor: pointer; height: 5px; border-radius: 4px;
+        }
+
+        .event-count {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem; color: var(--text-muted); font-weight: 600;
+            padding: 0.55rem 1.3rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+            letter-spacing: 0.02em;
+        }
+
+        .event-list {
+            flex: 1; overflow-y: auto; padding: 0.65rem;
+            scroll-behavior: smooth;
+        }
+        .event-list::-webkit-scrollbar { width: 4px; }
+        .event-list::-webkit-scrollbar-track { background: transparent; }
+        .event-list::-webkit-scrollbar-thumb { background: #ddd6ee; border-radius: 4px; }
+        .event-list::-webkit-scrollbar-thumb:hover { background: #b8adcf; }
+
+        /* ─────── EVENT CARDS ─────── */
+        .event-item {
+            padding: 0.95rem 1.05rem; border: 1.5px solid var(--border);
+            border-radius: var(--radius); margin-bottom: 0.55rem;
+            cursor: pointer; transition: all 0.2s var(--ease);
+            background: var(--surface); position: relative;
+            overflow: hidden;
+        }
+        .event-item::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 3px; background: transparent; transition: background 0.2s;
+            border-radius: 0 3px 3px 0;
+        }
+        .event-item:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 8px 20px -4px rgba(108,60,224,0.08);
+            transform: translateY(-1px);
+        }
+        .event-item:hover::before { background: var(--primary); }
+        .event-item:active { transform: translateY(0); }
+
+        .event-item.selected {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            box-shadow: 0 0 0 3px rgba(249,115,22,0.1);
+        }
+        .event-item.selected::before { background: var(--accent); }
+
+        .event-item .ev-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.62rem; color: var(--primary);
+            font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.05em; opacity: 0.8;
+        }
+        .event-item .ev-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700; margin: 4px 0 5px; color: var(--text);
+            font-size: 0.88rem; line-height: 1.35;
+        }
+        .event-item .ev-venue {
+            font-size: 0.75rem; color: var(--text-secondary);
+            font-weight: 500; display: flex; align-items: center; gap: 3px;
+        }
+        .event-item .ev-venue svg {
+            width: 12px; height: 12px; flex-shrink: 0;
+            fill: var(--primary); opacity: 0.6;
+        }
+
+        /* ─────── EMPTY STATE ─────── */
+        .empty-state {
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            padding: 3rem 1.5rem; text-align: center; color: var(--text-muted);
+        }
+        .empty-state .empty-icon { font-size: 2.8rem; margin-bottom: 1rem; filter: grayscale(0.3); }
+        .empty-state p {
+            font-size: 0.82rem; line-height: 1.6;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        /* ─────── MAP ─────── */
+        .map-area { flex: 1; position: relative; min-width: 0; }
         #map { height: 100%; width: 100%; }
 
-        /* Details Overlay */
+        /* ─────── DETAILS CARD ─────── */
         #details-card {
-            position: absolute; bottom: 25px; right: 25px; width: 380px; 
-            background: white; border-radius: 20px; box-shadow: var(--card-shadow);
-            display: none; z-index: 1000; overflow: hidden; border: 1px solid #e2e8f0;
-            animation: slideUp 0.3s ease-out;
+            position: absolute; bottom: 20px; right: 20px; width: 370px;
+            background: var(--surface); border-radius: 18px;
+            box-shadow: 0 20px 60px -15px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.04);
+            display: none; z-index: 1000; overflow: hidden;
+            animation: cardIn 0.4s var(--ease);
+            max-height: calc(100dvh - 40px); overflow-y: auto;
+        }
+        #details-card::-webkit-scrollbar { width: 4px; }
+        #details-card::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+
+        @keyframes cardIn {
+            from { transform: translateY(20px) scale(0.97); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
         }
 
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        /* Form Controls */
-        .control-group { margin-bottom: 1.25rem; }
-        label { display: block; font-size: 0.7rem; font-weight: 800; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
-        input[type="text"], select { width: 100%; padding: 0.75rem; border: 1.5px solid #e2e8f0; border-radius: 10px; font-size: 0.9rem; transition: 0.2s; box-sizing: border-box; }
-        input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(0,47,108,0.1); }
-        input[type="range"] { width: 100%; accent-color: var(--primary); cursor: pointer; }
-
-        /* Cards */
-        .event-item { 
-            padding: 1.25rem; border: 1px solid #e2e8f0; border-radius: 14px; margin-bottom: 0.75rem; 
-            cursor: pointer; transition: 0.3s; background: white;
+        .detail-img-wrap { position: relative; overflow: hidden; }
+        .detail-img-wrap img {
+            width: 100%; height: 190px; object-fit: cover;
+            background: linear-gradient(135deg, #ede9f6 0%, #ddd6ee 100%);
+            display: block; transition: transform 0.5s var(--ease);
         }
-        .event-item:hover { transform: translateY(-3px); border-color: var(--primary); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
-        .event-item.selected { border-color: var(--highlight); background: #fffaf0; border-width: 2px; }
+        .detail-img-wrap:hover img { transform: scale(1.03); }
+        .detail-img-wrap::after {
+            content: ''; position: absolute;
+            bottom: 0; left: 0; right: 0; height: 60px;
+            background: linear-gradient(transparent, white);
+            pointer-events: none;
+        }
 
-        .tag-badge { display: inline-block; background: #f1f5f9; color: #475569; font-size: 0.65rem; padding: 3px 10px; border-radius: 20px; margin-right: 5px; margin-top: 8px; font-weight: 600; }
-        
-        .loading-screen { position: fixed; inset: 0; background: white; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .close-btn {
+            position: absolute; top: 12px; right: 12px;
+            border: none; background: rgba(30,18,54,0.45);
+            -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+            color: white; width: 32px; height: 32px;
+            border-radius: 50%; cursor: pointer; font-size: 0.72rem;
+            z-index: 10; display: flex; align-items: center;
+            justify-content: center; transition: all 0.2s var(--ease); line-height: 1;
+        }
+        .close-btn:hover { background: rgba(30,18,54,0.8); transform: scale(1.1); }
 
-        /* Description HTML handling */
+        .detail-body { padding: 1rem 1.4rem 1.3rem; }
+        .detail-body .detail-date {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--accent); font-weight: 700;
+            font-size: 0.68rem; text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .detail-body h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin: 5px 0 4px; font-size: 1.15rem;
+            line-height: 1.25; font-weight: 800; color: var(--text);
+        }
+        .detail-body .detail-venue {
+            font-weight: 600; color: var(--primary); font-size: 0.85rem;
+        }
+        .detail-body .detail-address {
+            font-size: 0.78rem; color: var(--text-muted); margin: 3px 0 12px;
+            font-style: italic;
+        }
+        .detail-body .detail-desc {
+            font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7;
+            max-height: 100px; overflow-y: auto; margin-bottom: 14px;
+            border-top: 1px solid var(--border); padding-top: 10px;
+        }
+        .detail-body .detail-desc::-webkit-scrollbar { width: 3px; }
+        .detail-body .detail-desc::-webkit-scrollbar-thumb { background: #ede9f6; border-radius: 2px; }
         #d-desc p { margin: 0 0 0.5rem 0; }
+
+        .detail-link {
+            display: block; text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+            color: white; padding: 11px; border-radius: var(--radius-sm);
+            text-decoration: none; font-weight: 700; font-size: 0.82rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.2s var(--ease); letter-spacing: 0.01em;
+        }
+        .detail-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(108,60,224,0.35);
+            filter: brightness(1.08);
+        }
+
+        /* ─────── LOADER ─────── */
+        .loading-screen {
+            position: fixed; inset: 0; z-index: 9999;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8f6fd 0%, #ede9f6 100%);
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .loading-screen.fade-out { opacity: 0; visibility: hidden; }
+
+        .spinner {
+            width: 36px; height: 36px;
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 0.75s linear infinite; margin-bottom: 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loader-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700; color: var(--primary); font-size: 0.85rem;
+            letter-spacing: -0.01em;
+        }
+
+        /* ─────── MOBILE TOGGLE ─────── */
+        .mobile-toggle {
+            display: none; position: fixed; top: 14px; left: 14px;
+            z-index: 30; background: var(--surface); border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm); width: 46px; height: 46px;
+            cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            flex-direction: column; align-items: center;
+            justify-content: center; gap: 5px; transition: all 0.2s var(--ease);
+        }
+        .mobile-toggle span {
+            display: block; width: 19px; height: 2px;
+            background: var(--primary); border-radius: 2px;
+            transition: all 0.3s var(--ease);
+        }
+        .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+        .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .sidebar-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(26,18,54,0.35);
+            -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+            z-index: 15; opacity: 0; transition: opacity 0.35s ease;
+        }
+        .sidebar-overlay.active { display: block; opacity: 1; }
+
+        /* ─────── RESPONSIVE ─────── */
+        @media (max-width: 960px) {
+            :root { --sidebar-w: 330px; }
+            #details-card { width: calc(100% - 24px); right: 12px; bottom: 12px; max-width: 380px; }
+        }
+
+        @media (max-width: 680px) {
+            .mobile-toggle { display: flex; }
+
+            .sidebar {
+                position: fixed; left: 0; top: 0; bottom: 0;
+                width: 88vw; max-width: 370px; min-width: 0;
+                transform: translateX(-105%); z-index: 25;
+                box-shadow: 8px 0 30px rgba(0,0,0,0.12);
+            }
+            .sidebar.open { transform: translateX(0); }
+
+            .map-area { width: 100%; }
+
+            #details-card {
+                left: 12px; right: 12px; bottom: 12px;
+                width: auto; max-width: none;
+            }
+
+            .brand { padding: 1.2rem 1.3rem 0.8rem; }
+            .brand h2 { font-size: 1.2rem; }
+        }
+
+        @media (max-width: 400px) {
+            .filters { padding: 0.9rem 1rem 0.4rem; }
+            .event-list { padding: 0.5rem; }
+            .detail-body { padding: 0.9rem 1.1rem 1.1rem; }
+        }
+
+        /* Leaflet overrides */
+        .leaflet-control-zoom a {
+            border-radius: 8px !important;
+            width: 34px !important; height: 34px !important;
+            line-height: 34px !important; font-size: 16px !important;
+            border: 1.5px solid var(--border) !important;
+            color: var(--text) !important;
+        }
+        .leaflet-control-zoom { border-radius: 10px !important; overflow: hidden; border: none !important; box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important; }
     </style>
 </head>
 <body>
 
 <div id="loader" class="loading-screen">
     <div class="spinner"></div>
-    <div style="font-weight: 600; color: var(--primary);">Connecting to AWS Lambda...</div>
+    <div class="loader-text">Loading Helsinki Events...</div>
 </div>
 
-<div class="sidebar">
-    <div class="filter-header">
-        <h2 style="margin:0 0 1.5rem 0; color: var(--primary); letter-spacing: -0.02em;">Helsinki Explorer</h2>
+<button class="mobile-toggle" id="mobileToggle" aria-label="Toggle sidebar">
+    <span></span><span></span><span></span>
+</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="sidebar" id="sidebar">
+    <div class="brand">
+        <h2><span class="flag">&#127467;&#127470;</span> Helsinki Explorer</h2>
+        <p>Discover events happening near you</p>
+    </div>
+    <div class="filters">
         <div class="control-group">
-            <label>Keyword Search</label>
+            <label>Search Events</label>
             <input type="text" id="search" placeholder="Jazz, Food, Cinema...">
         </div>
         <div class="control-group">
-            <label>Timeframe: <span id="days-label">30</span> Days</label>
+            <label>Timeframe &mdash; <span id="days-label">30</span> days ahead</label>
             <input type="range" id="dateRange" min="1" max="30" value="30">
         </div>
         <div class="control-group">
             <label>Category</label>
-            <select id="tagFilter"><option value="all">All Tags</option></select>
+            <select id="tagFilter"><option value="all">All Categories</option></select>
         </div>
     </div>
+    <div class="event-count" id="eventCount">Loading events...</div>
     <div id="event-list" class="event-list"></div>
 </div>
 
 <div class="map-area">
     <div id="map"></div>
     <div id="details-card">
-        <button onclick="hideDetails()" style="position:absolute; top:15px; right:15px; border:none; background:rgba(0,0,0,0.6); color:white; width:32px; height:32px; border-radius:50%; cursor:pointer; font-weight:bold; z-index:10; display:flex; align-items:center; justify-content:center;">✕</button>
-        <img id="d-img" style="width:100%; height:200px; object-fit:cover; background:#e2e8f0;">
-        <div style="padding: 1.5rem;">
-            <div id="d-date-time" style="color: var(--highlight); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;"></div>
-            <h3 id="d-title" style="margin: 8px 0; font-size: 1.4rem; line-height: 1.2; font-weight: 800;"></h3>
-            <div id="d-venue" style="font-weight: 700; color: var(--primary); font-size: 0.95rem;"></div>
-            <div id="d-address" style="font-size: 0.85rem; color: #64748b; margin: 4px 0 15px 0; font-style: italic;"></div>
-            <div id="d-desc" style="font-size: 0.9rem; color: #475569; line-height: 1.6; max-height: 120px; overflow-y: auto; margin-bottom: 20px; border-top: 1px solid #f1f5f9; padding-top: 10px;"></div>
-            <a id="d-link" target="_blank" style="display:block; text-align:center; background: var(--primary); color:white; padding:14px; border-radius:12px; text-decoration:none; font-weight:bold; transition: 0.2s;">View Event Website</a>
+        <div class="detail-img-wrap">
+            <button class="close-btn" onclick="hideDetails()" aria-label="Close">&#10005;</button>
+            <img id="d-img" alt="Event image">
+        </div>
+        <div class="detail-body">
+            <div id="d-date-time" class="detail-date"></div>
+            <h3 id="d-title"></h3>
+            <div id="d-venue" class="detail-venue"></div>
+            <div id="d-address" class="detail-address"></div>
+            <div id="d-desc" class="detail-desc"></div>
+            <a id="d-link" target="_blank" rel="noopener noreferrer" class="detail-link">View Full Event &rarr;</a>
         </div>
     </div>
 </div>
@@ -108,17 +423,15 @@
     let allEvents = [];
     let map, markerGroup, markersMap = new Map();
 
-    const pinIcon = (color) => L.divIcon({
-        html: `<div style="background-color:${color}; width:16px; height:16px; border-radius:50%; border:3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3);"></div>`,
-        className: '', iconSize: [16, 16], iconAnchor: [8, 8]
+    const pinIcon = (color, size = 14) => L.divIcon({
+        html: `<div style="background:${color}; width:${size}px; height:${size}px; border-radius:50%; border:2.5px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.25); transition: all 0.2s;"></div>`,
+        className: '', iconSize: [size, size], iconAnchor: [size/2, size/2]
     });
 
-    // Clean Date: "10 April 2026"
-    function formatNiceDate(d) { 
-        return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }); 
+    function formatNiceDate(d) {
+        return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
     }
-    
-    // Clean Time: "3:00 PM"
+
     function formatNiceTime(t) {
         if (!t) return "Time TBA";
         const parts = t.split(':');
@@ -127,21 +440,48 @@
         return `${h % 12 || 12}:${m} ${h >= 12 ? 'PM' : 'AM'}`;
     }
 
+    // Mobile sidebar
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const mobileToggle = document.getElementById('mobileToggle');
+
+    function openSidebar() {
+        sidebar.classList.add('open');
+        sidebarOverlay.classList.add('active');
+        mobileToggle.classList.add('active');
+    }
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        mobileToggle.classList.remove('active');
+    }
+
+    mobileToggle.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
     async function bootstrap() {
         map = L.map('map', { zoomControl: false }).setView([60.1699, 24.9384], 13);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+        L.control.zoom({ position: 'topright' }).addTo(map);
         markerGroup = L.layerGroup().addTo(map);
 
         try {
             const res = await fetch(API_URL);
             if (!res.ok) throw new Error("API Offline");
             allEvents = await res.json();
-            
+
             buildTags();
             updateUI();
-            document.getElementById('loader').style.display = 'none';
+            const loader = document.getElementById('loader');
+            loader.classList.add('fade-out');
+            setTimeout(() => loader.style.display = 'none', 600);
         } catch (err) {
-            document.getElementById('loader').innerHTML = `<div style="color:red; text-align:center; padding: 20px;"><b>Connection Error</b><br>Ensure Lambda is online and CORS is active.</div>`;
+            document.getElementById('loader').innerHTML = `
+                <div style="text-align:center; padding:2rem;">
+                    <div style="font-size:2.5rem; margin-bottom:1rem;">&#9888;&#65039;</div>
+                    <div style="font-family:Montserrat,sans-serif; font-weight:800; color:#dc2626; margin-bottom:0.5rem; font-size:1.1rem;">Connection Error</div>
+                    <div style="color:#6b6580; font-size:0.85rem;">Ensure Lambda is online and CORS is active.</div>
+                </div>`;
         }
     }
 
@@ -151,7 +491,7 @@
         const tagSelect = document.getElementById('tagFilter');
         Array.from(tagSet).sort().forEach(t => {
             const opt = document.createElement('option');
-            opt.value = t; opt.innerText = t; tagSelect.appendChild(opt);
+            opt.value = t; opt.textContent = t; tagSelect.appendChild(opt);
         });
     }
 
@@ -159,7 +499,7 @@
         const search = document.getElementById('search').value.toLowerCase();
         const tag = document.getElementById('tagFilter').value;
         const daysLimit = parseInt(document.getElementById('dateRange').value);
-        document.getElementById('days-label').innerText = daysLimit;
+        document.getElementById('days-label').textContent = daysLimit;
 
         const now = new Date();
         const maxDate = new Date();
@@ -173,6 +513,10 @@
             return matchesSearch && matchesTag && matchesDate;
         });
 
+        document.getElementById('eventCount').textContent =
+            filtered.length === 0 ? 'No events found' :
+            `${filtered.length} event${filtered.length !== 1 ? 's' : ''} found`;
+
         renderList(filtered);
         renderMarkers(filtered);
     }
@@ -180,14 +524,27 @@
     function renderList(items) {
         const list = document.getElementById('event-list');
         list.innerHTML = '';
+
+        if (items.length === 0) {
+            list.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-icon">&#128270;</div>
+                    <p>No events match your filters.<br>Try a broader search or longer timeframe.</p>
+                </div>`;
+            return;
+        }
+
         items.forEach((e, idx) => {
             const card = document.createElement('div');
             card.className = 'event-item';
             card.id = `item-${idx}`;
             card.innerHTML = `
-                <div style="font-size:0.75rem; color:var(--highlight); font-weight:800; text-transform:uppercase;">${formatNiceDate(e.date)}</div>
-                <div style="font-weight:800; margin:4px 0; color:#0f172a;">${e.title}</div>
-                <div style="font-size:0.8rem; color:var(--primary); font-weight:600;">📍 ${e.venue || 'TBA'}</div>
+                <div class="ev-date">${formatNiceDate(e.date)}</div>
+                <div class="ev-title">${e.title}</div>
+                <div class="ev-venue">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+                    ${e.venue || 'TBA'}
+                </div>
             `;
             card.onclick = () => selectEvent(e, idx);
             list.appendChild(card);
@@ -200,7 +557,7 @@
         const bounds = [];
         items.forEach((e, idx) => {
             if (e.location) {
-                const marker = L.marker(e.location, { icon: pinIcon('#002f6c') }).on('click', () => selectEvent(e, idx));
+                const marker = L.marker(e.location, { icon: pinIcon('#6c3ce0') }).on('click', () => selectEvent(e, idx));
                 markerGroup.addLayer(marker);
                 markersMap.set(idx, marker);
                 bounds.push(e.location);
@@ -210,25 +567,30 @@
     }
 
     async function selectEvent(e, idx) {
-        markersMap.forEach(m => m.setIcon(pinIcon('#002f6c')));
+        if (window.innerWidth <= 680) closeSidebar();
+
+        markersMap.forEach(m => m.setIcon(pinIcon('#6c3ce0')));
         document.querySelectorAll('.event-item').forEach(el => el.classList.remove('selected'));
 
         const m = markersMap.get(idx);
-        if (m) { m.setIcon(pinIcon('#ff4500')); map.flyTo(e.location, 16); }
-        document.getElementById(`item-${idx}`)?.classList.add('selected');
+        if (m) { m.setIcon(pinIcon('#f97316', 20)); map.flyTo(e.location, 16); }
 
-        // Show details and handle HTML description
+        const item = document.getElementById(`item-${idx}`);
+        if (item) {
+            item.classList.add('selected');
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
         document.getElementById('details-card').style.display = 'block';
-        document.getElementById('d-title').innerText = e.title;
-        document.getElementById('d-date-time').innerText = `${formatNiceDate(e.date)} • ${formatNiceTime(e.time)}`;
-        document.getElementById('d-venue').innerText = e.venue || "Helsinki Venue";
+        document.getElementById('d-title').textContent = e.title;
+        document.getElementById('d-date-time').textContent = `${formatNiceDate(e.date)}  \u2022  ${formatNiceTime(e.time)}`;
+        document.getElementById('d-venue').textContent = e.venue || "Helsinki Venue";
         document.getElementById('d-desc').innerHTML = e.description || "No description provided.";
         document.getElementById('d-img').src = e.img_url || "https://via.placeholder.com/400x200?text=Helsinki+Event";
         document.getElementById('d-link').href = e.signup_link || "#";
 
-        // Reverse Geocoding with CORS Proxy
         const addrEl = document.getElementById('d-address');
-        addrEl.innerText = "Locating street address...";
+        addrEl.textContent = "Locating address\u2026";
         if (e.location) {
             try {
                 const proxy = 'https://corsproxy.io/?';
@@ -236,27 +598,28 @@
                 const r = await fetch(proxy + encodeURIComponent(nominatim));
                 const data = await r.json();
                 const a = data.address;
-                
-                // Build Specific Street Address
                 const road = a.road || a.pedestrian || a.path || "";
                 const house = a.house_number || "";
                 const area = a.suburb || a.neighbourhood || a.city_district || "";
-                
                 const combined = road ? `${road} ${house}`.trim() : "";
-                addrEl.innerText = combined ? `${combined}, ${area}` : data.display_name.split(',').slice(0, 2).join(', ');
-            } catch { addrEl.innerText = "Helsinki, Finland"; }
+                addrEl.textContent = combined ? `${combined}, ${area}` : data.display_name.split(',').slice(0, 2).join(', ');
+            } catch { addrEl.textContent = "Helsinki, Finland"; }
         } else {
-            addrEl.innerText = "";
+            addrEl.textContent = "";
         }
     }
 
     function hideDetails() {
         document.getElementById('details-card').style.display = 'none';
-        markersMap.forEach(m => m.setIcon(pinIcon('#002f6c')));
+        markersMap.forEach(m => m.setIcon(pinIcon('#6c3ce0')));
         document.querySelectorAll('.event-item').forEach(el => el.classList.remove('selected'));
     }
 
-    document.getElementById('search').addEventListener('input', updateUI);
+    let searchTimeout;
+    document.getElementById('search').addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(updateUI, 150);
+    });
     document.getElementById('tagFilter').addEventListener('change', updateUI);
     document.getElementById('dateRange').addEventListener('input', updateUI);
 
