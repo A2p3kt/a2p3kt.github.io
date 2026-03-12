@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helsinki Event Explorer | AWS Demo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        :root {
+            --primary: #002f6c;
+            --highlight: #ff4500;
+            --sidebar: 400px;
+            --bg: #f8fafc;
+            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; margin: 0; display: flex; height: 100vh; background: var(--bg); overflow: hidden; color: #1e293b; }
+
+        /* Sidebar UI */
+        .sidebar { width: var(--sidebar); display: flex; flex-direction: column; background: white; border-right: 1px solid #e2e8f0; z-index: 20; box-shadow: 4px 0 15px rgba(0,0,0,0.03); }
+        .filter-header { padding: 1.5rem; background: #fff; border-bottom: 1px solid #e2e8f0; }
+        .event-list { flex: 1; overflow-y: auto; padding: 1rem; scroll-behavior: smooth; }
+
+        /* Map UI */
+        .map-area { flex: 1; position: relative; }
+        #map { height: 100%; width: 100%; }
+
+        /* Details Overlay */
+        #details-card {
+            position: absolute; bottom: 25px; right: 25px; width: 380px; 
+            background: white; border-radius: 20px; box-shadow: var(--card-shadow);
+            display: none; z-index: 1000; overflow: hidden; border: 1px solid #e2e8f0;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* Form Controls */
+        .control-group { margin-bottom: 1.25rem; }
+        label { display: block; font-size: 0.7rem; font-weight: 800; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        input[type="text"], select { width: 100%; padding: 0.75rem; border: 1.5px solid #e2e8f0; border-radius: 10px; font-size: 0.9rem; transition: 0.2s; box-sizing: border-box; }
+        input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(0,47,108,0.1); }
+        input[type="range"] { width: 100%; accent-color: var(--primary); cursor: pointer; }
+
+        /* Cards */
+        .event-item { 
+            padding: 1.25rem; border: 1px solid #e2e8f0; border-radius: 14px; margin-bottom: 0.75rem; 
+            cursor: pointer; transition: 0.3s; background: white;
+        }
+        .event-item:hover { transform: translateY(-3px); border-color: var(--primary); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        .event-item.selected { border-color: var(--highlight); background: #fffaf0; border-width: 2px; }
+
+        .tag-badge { display: inline-block; background: #f1f5f9; color: #475569; font-size: 0.65rem; padding: 3px 10px; border-radius: 20px; margin-right: 5px; margin-top: 8px; font-weight: 600; }
+        
+        .loading-screen { position: fixed; inset: 0; background: white; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Description HTML handling */
+        #d-desc p { margin: 0 0 0.5rem 0; }
+    </style>
+</head>
+<body>
+
+<div id="loader" class="loading-screen">
+    <div class="spinner"></div>
+    <div style="font-weight: 600; color: var(--primary);">Connecting to AWS Lambda...</div>
+</div>
+
+<div class="sidebar">
+    <div class="filter-header">
+        <h2 style="margin:0 0 1.5rem 0; color: var(--primary); letter-spacing: -0.02em;">Helsinki Explorer</h2>
+        <div class="control-group">
+            <label>Keyword Search</label>
+            <input type="text" id="search" placeholder="Jazz, Food, Cinema...">
+        </div>
+        <div class="control-group">
+            <label>Timeframe: <span id="days-label">30</span> Days</label>
+            <input type="range" id="dateRange" min="1" max="30" value="30">
+        </div>
+        <div class="control-group">
+            <label>Category</label>
+            <select id="tagFilter"><option value="all">All Tags</option></select>
+        </div>
+    </div>
+    <div id="event-list" class="event-list"></div>
+</div>
+
+<div class="map-area">
+    <div id="map"></div>
+    <div id="details-card">
+        <button onclick="hideDetails()" style="position:absolute; top:15px; right:15px; border:none; background:rgba(0,0,0,0.6); color:white; width:32px; height:32px; border-radius:50%; cursor:pointer; font-weight:bold; z-index:10; display:flex; align-items:center; justify-content:center;">✕</button>
+        <img id="d-img" style="width:100%; height:200px; object-fit:cover; background:#e2e8f0;">
+        <div style="padding: 1.5rem;">
+            <div id="d-date-time" style="color: var(--highlight); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;"></div>
+            <h3 id="d-title" style="margin: 8px 0; font-size: 1.4rem; line-height: 1.2; font-weight: 800;"></h3>
+            <div id="d-venue" style="font-weight: 700; color: var(--primary); font-size: 0.95rem;"></div>
+            <div id="d-address" style="font-size: 0.85rem; color: #64748b; margin: 4px 0 15px 0; font-style: italic;"></div>
+            <div id="d-desc" style="font-size: 0.9rem; color: #475569; line-height: 1.6; max-height: 120px; overflow-y: auto; margin-bottom: 20px; border-top: 1px solid #f1f5f9; padding-top: 10px;"></div>
+            <a id="d-link" target="_blank" style="display:block; text-align:center; background: var(--primary); color:white; padding:14px; border-radius:12px; text-decoration:none; font-weight:bold; transition: 0.2s;">View Event Website</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    const API_URL = 'https://kokz1rtalh.execute-api.eu-north-1.amazonaws.com/default/helsinki-event-aggregator';
+    let allEvents = [];
+    let map, markerGroup, markersMap = new Map();
+
+    const pinIcon = (color) => L.divIcon({
+        html: `<div style="background-color:${color}; width:16px; height:16px; border-radius:50%; border:3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3);"></div>`,
+        className: '', iconSize: [16, 16], iconAnchor: [8, 8]
+    });
+
+    // Clean Date: "10 April 2026"
+    function formatNiceDate(d) { 
+        return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }); 
+    }
+    
+    // Clean Time: "3:00 PM"
+    function formatNiceTime(t) {
+        if (!t) return "Time TBA";
+        const parts = t.split(':');
+        const h = parseInt(parts[0]);
+        const m = parts[1];
+        return `${h % 12 || 12}:${m} ${h >= 12 ? 'PM' : 'AM'}`;
+    }
+
+    async function bootstrap() {
+        map = L.map('map', { zoomControl: false }).setView([60.1699, 24.9384], 13);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+        markerGroup = L.layerGroup().addTo(map);
+
+        try {
+            const res = await fetch(API_URL);
+            if (!res.ok) throw new Error("API Offline");
+            allEvents = await res.json();
+            
+            buildTags();
+            updateUI();
+            document.getElementById('loader').style.display = 'none';
+        } catch (err) {
+            document.getElementById('loader').innerHTML = `<div style="color:red; text-align:center; padding: 20px;"><b>Connection Error</b><br>Ensure Lambda is online and CORS is active.</div>`;
+        }
+    }
+
+    function buildTags() {
+        const tagSet = new Set();
+        allEvents.forEach(e => (e.tags || []).forEach(t => tagSet.add(t)));
+        const tagSelect = document.getElementById('tagFilter');
+        Array.from(tagSet).sort().forEach(t => {
+            const opt = document.createElement('option');
+            opt.value = t; opt.innerText = t; tagSelect.appendChild(opt);
+        });
+    }
+
+    function updateUI() {
+        const search = document.getElementById('search').value.toLowerCase();
+        const tag = document.getElementById('tagFilter').value;
+        const daysLimit = parseInt(document.getElementById('dateRange').value);
+        document.getElementById('days-label').innerText = daysLimit;
+
+        const now = new Date();
+        const maxDate = new Date();
+        maxDate.setDate(now.getDate() + daysLimit);
+
+        const filtered = allEvents.filter(e => {
+            const eDate = new Date(e.date);
+            const matchesSearch = e.title.toLowerCase().includes(search);
+            const matchesTag = tag === 'all' || (e.tags && e.tags.includes(tag));
+            const matchesDate = eDate >= new Date(now.setHours(0,0,0,0)) && eDate <= maxDate;
+            return matchesSearch && matchesTag && matchesDate;
+        });
+
+        renderList(filtered);
+        renderMarkers(filtered);
+    }
+
+    function renderList(items) {
+        const list = document.getElementById('event-list');
+        list.innerHTML = '';
+        items.forEach((e, idx) => {
+            const card = document.createElement('div');
+            card.className = 'event-item';
+            card.id = `item-${idx}`;
+            card.innerHTML = `
+                <div style="font-size:0.75rem; color:var(--highlight); font-weight:800; text-transform:uppercase;">${formatNiceDate(e.date)}</div>
+                <div style="font-weight:800; margin:4px 0; color:#0f172a;">${e.title}</div>
+                <div style="font-size:0.8rem; color:var(--primary); font-weight:600;">📍 ${e.venue || 'TBA'}</div>
+            `;
+            card.onclick = () => selectEvent(e, idx);
+            list.appendChild(card);
+        });
+    }
+
+    function renderMarkers(items) {
+        markerGroup.clearLayers();
+        markersMap.clear();
+        const bounds = [];
+        items.forEach((e, idx) => {
+            if (e.location) {
+                const marker = L.marker(e.location, { icon: pinIcon('#002f6c') }).on('click', () => selectEvent(e, idx));
+                markerGroup.addLayer(marker);
+                markersMap.set(idx, marker);
+                bounds.push(e.location);
+            }
+        });
+        if (bounds.length > 0) map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
+    }
+
+    async function selectEvent(e, idx) {
+        markersMap.forEach(m => m.setIcon(pinIcon('#002f6c')));
+        document.querySelectorAll('.event-item').forEach(el => el.classList.remove('selected'));
+
+        const m = markersMap.get(idx);
+        if (m) { m.setIcon(pinIcon('#ff4500')); map.flyTo(e.location, 16); }
+        document.getElementById(`item-${idx}`)?.classList.add('selected');
+
+        // Show details and handle HTML description
+        document.getElementById('details-card').style.display = 'block';
+        document.getElementById('d-title').innerText = e.title;
+        document.getElementById('d-date-time').innerText = `${formatNiceDate(e.date)} • ${formatNiceTime(e.time)}`;
+        document.getElementById('d-venue').innerText = e.venue || "Helsinki Venue";
+        document.getElementById('d-desc').innerHTML = e.description || "No description provided.";
+        document.getElementById('d-img').src = e.img_url || "https://via.placeholder.com/400x200?text=Helsinki+Event";
+        document.getElementById('d-link').href = e.signup_link || "#";
+
+        // Reverse Geocoding with CORS Proxy
+        const addrEl = document.getElementById('d-address');
+        addrEl.innerText = "Locating street address...";
+        if (e.location) {
+            try {
+                const proxy = 'https://corsproxy.io/?';
+                const nominatim = `https://nominatim.openstreetmap.org/reverse?lat=${e.location[0]}&lon=${e.location[1]}&format=json&addressdetails=1`;
+                const r = await fetch(proxy + encodeURIComponent(nominatim));
+                const data = await r.json();
+                const a = data.address;
+                
+                // Build Specific Street Address
+                const road = a.road || a.pedestrian || a.path || "";
+                const house = a.house_number || "";
+                const area = a.suburb || a.neighbourhood || a.city_district || "";
+                
+                const combined = road ? `${road} ${house}`.trim() : "";
+                addrEl.innerText = combined ? `${combined}, ${area}` : data.display_name.split(',').slice(0, 2).join(', ');
+            } catch { addrEl.innerText = "Helsinki, Finland"; }
+        } else {
+            addrEl.innerText = "";
+        }
+    }
+
+    function hideDetails() {
+        document.getElementById('details-card').style.display = 'none';
+        markersMap.forEach(m => m.setIcon(pinIcon('#002f6c')));
+        document.querySelectorAll('.event-item').forEach(el => el.classList.remove('selected'));
+    }
+
+    document.getElementById('search').addEventListener('input', updateUI);
+    document.getElementById('tagFilter').addEventListener('change', updateUI);
+    document.getElementById('dateRange').addEventListener('input', updateUI);
+
+    bootstrap();
+</script>
+</body>
+</html>
