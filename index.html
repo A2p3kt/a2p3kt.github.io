@@ -1,180 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage</title>
-  <link rel="stylesheet" href="styles/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-  <!-- To add an icon on the title bar in the browser after loading -->
-  <link rel="apple-touch-icon" sizes="180x180" href="styles/images/favicon_io/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="styles/images/favicon_io/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="styles/images/favicon_io/favicon-16x16.png">
-  <link rel="manifest" href="styles/images/favicon_io/site.webmanifest">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toluwalase | Backend Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
-
 <body>
-  <header>
-    <nav>
-      <!--Nav links and logo goes here-->
-      <div class="logo"><a href="index.html">Explore Nigeria</a></div>
-      <div class="nav-links">
-        <a href="index.html" class="active">Home</a>
-        <a href="destinations.html">Destinations</a>
-        <a href="about.html">About Us</a>
-      </div>
+    <nav id="site-nav" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-brand">Toluwalase</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projects.html">Projects</a>
+            <button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme"></button>
+        </div>
     </nav>
-    <!--Other header information goes here-->
-  </header>
 
-  <main>
-    <section class="hero">
-      <!--Hero section stuff goes here-->
-      <h1>Welcome to Nigeria - The Giant of Africa</h1>
-      <p>
-        Where the earth sings in colors bold, and every breeze tells a
-        story—step into Nigeria, the cornerstone of African continent.
-      </p>
-      <a href="destinations.html" class="ctn-btn">Explore Now</a>
-    </section>
+    <main>
+        <section class="hero">
+            <div class="hero-copy">
+                <h1>
+                    <span class="block">Toluwalase Ayoola</span>
+                </h1>
+                <p class="hero-sub">Backend and Data Engineering student building APIs, data pipelines, and cloud infrastructure in Helsinki, Finland.</p>
+                <div class="hero-links">
+                    <a href="projects.html">View Projects →</a>
+                    <a href="https://github.com/A2p3kt" target="_blank" rel="noopener">GitHub ↗</a>
+                </div>
+            </div>
+            <figure class="hero-photo-wrap">
+                <img src="media/cv.jpg" alt="Portrait of Toluwalase" class="hero-photo">
+                <figcaption class="hero-photo-caption">yeah, that is what I look like</figcaption>
+            </figure>
+        </section>
 
-    <section class="content mission">
-      <h2>Our Mission</h2>
-      <p>
-        Our mission is to showcase the essence of Nigeria—the Giant of Africa—by sharing its vibrant culture, welcoming people, rich culinary heritage, and breathtaking landscapes.
-        We aim to inspire exploration and create meaningful experiences that reveal the beauty, diversity, and spirit of this remarkable nation.
-      </p>
-      <p>
-        Whether you're a tourist, a travel enthusiast, an expatriate, an international student, or a Nigerian eager to rediscover home, there's something here for everyone—no matter your age, background, or journey.
-        With 36 vibrant states and a dynamic capital city, Nigeria promises a lifetime of adventures and unforgettable stories.
-      </p>
-      <p>
-        Here's just a glimpse of what awaits you:
-      </p>
-      <ul>
-        <li>Wander bustling markets filled with color and life</li>
-        <li>Experience festivals that celebrate unity in diversity</li>
-        <li>Explore landscapes that range from rolling savannahs to stunning coastlines</li>
-      </ul>
-      <p>
-        Let us be your guide on a journey through the heart of Africa. So, what are you waiting for?
-      </p>
-    </section>
+        <section class="skills" aria-labelledby="skills-title">
+            <h2 id="skills-title">Core Skills</h2>
+            <div class="skills-list" role="list">
+                <span class="mono skill-tag" role="listitem">Python</span>
+                <span class="mono skill-tag" role="listitem">FastAPI</span>
+                <span class="mono skill-tag" role="listitem">Django</span>
+                <span class="mono skill-tag" role="listitem">SQL</span>
+                <span class="mono skill-tag" role="listitem">Database Design</span>
+                <span class="mono skill-tag" role="listitem">AWS Lambda</span>
+                <span class="mono skill-tag" role="listitem">API Design</span>
+                <span class="mono skill-tag" role="listitem">CI/CD</span>
+            </div>
+        </section>
 
-    <section class="content">
-      <h2>Discover your next adventure</h2>
+        <section id="timeline">
+            <div class="timeline-group">
+                <h2 class="timeline-group-label">Education</h2>
+                <div class="timeline-container">
+                    <article class="timeline-card">
+                        <time class="mono" datetime="2025">2025 – 2028</time>
+                        <h3>ICT Infrastructure & Cloud Services</h3>
+                        <p class="institution">Haaga-Helia University of Applied Sciences</p>
+                        <p class="description">Bachelor's programme in cloud platforms, networking, and backend systems.</p>
+                    </article>
+                </div>
+            </div>
 
-      <!--Image carousel-->
-      <div class="grid">
-        <div class="grid-item big">
-          <div class="image-container">
-            <img src="styles/images/carousel/city-view.jpg" alt="View of a neighborhood in lagos" loading="lazy">
-          </div>
-          <h3>Whispers of the Neighborhood</h3>
-          <p>Evening hues over a Lagos residential scene.</p>
+            <div class="timeline-group">
+                <h2 class="timeline-group-label">Experience</h2>
+                <div class="timeline-container">
+                    <article class="timeline-card">
+                        <time class="mono" datetime="2024">2024 – Present</time>
+                        <h3>[Most Recent Role]</h3>
+                        <p class="institution">Company Name</p>
+                        <p class="description">One-line description of responsibilities.</p>
+                    </article>
+                    <article class="timeline-card">
+                        <time class="mono" datetime="2023">2023 – 2024</time>
+                        <h3>[Earlier Role]</h3>
+                        <p class="institution">Company Name</p>
+                        <p class="description">One-line description.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="quote-box" aria-label="Personal quote">
+            <div class="quote-mark" aria-hidden="true">
+                <i class="fa-solid fa-quote-left"></i>
+            </div>
+            <p class="quote-text">"The problem with experts is that they know what can't be done."</p>
+            <p class="quote-author">— Henry Ford</p>
+            <p class="quote-note mono">Luckily, I don't have that problem yet.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <p>© 2026 Toluwalase. Backend Engineer in Helsinki.</p>
+        <div class="footer-socials" aria-label="Social links">
+            <a href="https://github.com/A2p3kt" target="_blank" rel="noopener" aria-label="GitHub">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/toluwalase-ayoola" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="mailto:toluwaayo909@gmail.com" aria-label="Email">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            </a>
         </div>
+    </footer>
 
-        <div class="grid-item">
-          <div class="image-container">
-            <img src="styles/images/carousel/lagos-cathedral.jpg" alt="Lagos Cathedral" loading="lazy">
-          </div>
-          <h3>Grace Amidst the Hustle</h3>
-          <p>The majestic Lagos Cathedral on a bustling day.</p>
-        </div>
-
-        <div class="grid-item wide">
-          <div class="image-container">
-            <img src="styles/images/carousel/men-blowing-trumpet.jpg" alt="Men blowing trumpets" loading="lazy">
-          </div>
-          <h3>Brass and Culture, Loud and Proud</h3>
-          <p>A vibrant musical moment in West Africa.</p>
-        </div>
-
-        <div class="grid-item">
-          <div class="image-container">
-            <img src="styles/images/carousel/street-sunset-view.jpg" alt="sunset view of a road" loading="lazy">
-          </div>
-          <h3>Endless Roads, Endless Sunsets</h3>
-          <p>Golden hour paints a street in Abuja.</p>
-        </div>
-
-        <div class="grid-item wide">
-          <div class="image-container">
-            <img src="styles/images/carousel/third-mainland-at-night.jpg" alt="Ikoyi link bridge at night" loading="lazy">
-          </div>
-          <h3>Stars Above, Lights Below</h3>
-          <p>The illuminated Ikoyi Link Bridge at night.</p>
-        </div>
-
-        <div class="grid-item">
-          <div class="image-container">
-            <img src="styles/images/carousel/waterfall.jpg" alt="a small waterfall" loading="lazy">
-          </div>
-          <h3>Cascading Beauty at Arinta</h3>
-          <p>A refreshing glimpse of Arinta Waterfall in Ekiti.</p>
-        </div>
-
-        <div class="grid-item tall">
-          <div class="image-container">
-            <img src="styles/images/carousel/woman-herding-cattle.jpg" alt="a woman in a field of cattle" loading="lazy">
-          </div>
-          <h3>Challenging Norms, Leading the Herd</h3>
-          <p>A woman herding cattle in Lafia, North Central Nigeria.</p>
-        </div>
-      </div>
-
-      <!-- Fullscreen Preview Container -->
-      <div id="fullscreenPreview">
-        <img id="previewImage" src="#" alt="tbd">
-      </div>
-
-      <a href="destinations.html" class="ctn-btn">Explore Now</a>
-    </section>
-  </main>
-
-  <footer>
-    <!--Footer stuff will go here-->
-    <div class="social">
-      <!--Social media icons-->
-      <a href="mailto:info@expnaija.com" class="social-icon" title="Email" target="_blank">
-        <ion-icon name="mail-outline"></ion-icon>
-      </a>
-      <a href="tel:+2341234567890" class="social-icon" title="Phone" target="_blank">
-        <ion-icon name="call-outline"></ion-icon>
-      </a>
-      <a href="https://www.instagram.com/theasovilla" class="social-icon" title="Instagram" target="_blank">
-        <ion-icon name="logo-instagram"></ion-icon>
-      </a>
-      <a href="https://www.facebook.com/TheAsoVilla" class="social-icon" title="Facebook" target="_blank">
-        <ion-icon name="logo-facebook"></ion-icon>
-      </a>
-      <a href="https://www.youtube.com/channel/UC_ei8o3S3CuCC9gD5fTZ2VQ/" class="social-icon" title="YouTube" target="_blank">
-        <ion-icon name="logo-youtube"></ion-icon>
-      </a>
-      <a href="https://x.com/nigeriagov?lang=en" class="social-icon" title="X (Twitter)" target="_blank">
-        <ion-icon name="logo-twitter"></ion-icon> <!-- Replace with Twitter logo -->
-      </a>
-    </div>
-
-    <div class="footer-nav-links">
-      <a href="index.html">Home</a>
-      <a href="destinations.html">Destinations</a>
-      <a href="about.html">About Us</a>
-    </div>
-
-    <div class="copyright-info">
-      <!--Copyright stuff-->
-      <p>&copy;2025 Explore Nigeria | All rights reserved</p>
-    </div>
-  </footer>
-  <!--Using a script tag to import a library of icons instead of using the svg tags, the two tags are there to accomodate for both old and new browsers-->
-  <script type="module" src="https://unpkg.com/ionicons@6.0.3/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@6.0.3/dist/ionicons/ionicons.js"></script>
-  <script src="script/script.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/index.js"></script>
 </body>
-
 </html>

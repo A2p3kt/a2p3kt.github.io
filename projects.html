@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Toluwalase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/projects.css">
+    <link rel="stylesheet" href="css/project-detail.css">
+</head>
+<body>
+    <nav id="site-nav" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-brand">Toluwalase</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="projects.html">Projects</a>
+            <button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme"></button>
+        </div>
+    </nav>
+
+    <main>
+        <h1>Projects</h1>
+        <p class="subtitle">A record of things I've built and how they work.</p>
+        
+        <div class="project-grid" id="project-grid"></div>
+    </main>
+
+    <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" 
+         aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-panel" id="modal-panel"></div>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+        <p>© 2026 Toluwalase. Built with vanilla HTML, CSS, and JavaScript.</p>
+        <div class="footer-socials" aria-label="Social links">
+            <a href="https://github.com/A2p3kt" target="_blank" rel="noopener" aria-label="GitHub">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/toluwalase-ayoola" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="mailto:toluwaayo909@gmail.com" aria-label="Email">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script src="js/global.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/project-detail.js"></script>
+</body>
+</html>

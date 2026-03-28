@@ -1,0 +1,355 @@
+/* ========================================
+   DESIGN SYSTEM & CSS CUSTOM PROPERTIES
+   ======================================== */
+
+:root {
+  /* Light mode (default) */
+  --bg: #f5f8ff;
+  --surface: #ffffff;
+  --surface-alt: #eaf0fb;
+  --border: #ccd9f0;
+  --text-primary: #0b1a2e;
+  --text-secondary: #4d6480;
+  --accent: #1a52e8;
+  --accent-hover: #1340c0;
+  --accent-soft: #dde8ff;
+
+  /* Typography scale */
+  --text-xs: 0.72rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.2rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.75rem;
+  --text-4xl: 3.75rem;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* Transitions */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+}
+
+html.dark {
+  /* Dark mode */
+  --bg: #070d18;
+  --surface: #0d1825;
+  --surface-alt: #111f30;
+  --border: #1c2e45;
+  --text-primary: #e2ecff;
+  --text-secondary: #6a8fb0;
+  --accent: #4d84ff;
+  --accent-hover: #6b9bff;
+  --accent-soft: #0d2040;
+}
+
+/* ========================================
+   MODERN CSS RESET
+   ======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  transition: background-color var(--duration-base) var(--ease),
+              color var(--duration-base) var(--ease);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ========================================
+   BASE TYPOGRAPHY
+   ======================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+body {
+  font-weight: 400;
+}
+
+/* ========================================
+   GLOBAL FOCUS VISIBLE
+   ======================================== */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ========================================
+   UTILITIES
+   ======================================== */
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-xs);
+}
+
+/* ========================================
+   SCROLLBAR STYLING
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-alt);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+
+nav#site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) var(--space-7);
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  transition: background-color var(--duration-base) var(--ease);
+}
+
+nav.scrolled {
+  background: rgba(205, 217, 240, 0.85);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+html.dark nav.scrolled {
+  background: rgba(13, 24, 37, 0.85);
+}
+
+.nav-brand {
+  font-family: 'DM Serif Display', serif;
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.nav-links a {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--duration-base) var(--ease);
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.nav-links a[aria-current="page"] {
+  color: var(--accent);
+}
+
+#theme-toggle {
+  background: linear-gradient(145deg, var(--surface-alt), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color var(--duration-base) var(--ease),
+              background-color var(--duration-base) var(--ease),
+              transform var(--duration-fast) var(--ease),
+              box-shadow var(--duration-fast) var(--ease);
+  padding: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#theme-toggle:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(26, 82, 232, 0.18);
+}
+
+#theme-toggle i {
+  pointer-events: none;
+}
+
+#theme-toggle .theme-icon {
+  transition: transform var(--duration-base) var(--ease),
+              opacity var(--duration-fast) var(--ease);
+}
+
+#theme-toggle:hover .theme-icon {
+  transform: rotate(-16deg) scale(1.06);
+}
+
+html.dark #theme-toggle {
+  background: linear-gradient(145deg, #162940, #0d1825);
+}
+
+html.dark #theme-toggle:hover {
+  box-shadow: 0 6px 20px rgba(77, 132, 255, 0.24);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.site-footer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-7) var(--space-6);
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.site-footer p {
+  font-size: var(--text-sm);
+}
+
+.site-footer a {
+  color: var(--accent);
+  transition: color var(--duration-base) var(--ease);
+}
+
+.site-footer a:hover {
+  color: var(--accent-hover);
+}
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.footer-socials a {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  transition: color var(--duration-base) var(--ease),
+              border-color var(--duration-base) var(--ease),
+              transform var(--duration-fast) var(--ease),
+              background-color var(--duration-base) var(--ease);
+}
+
+.footer-socials a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 640px) {
+  nav#site-nav {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .nav-brand {
+    font-size: var(--text-base);
+  }
+
+  .nav-links {
+    gap: var(--space-4);
+  }
+
+  .nav-links a {
+    font-size: var(--text-xs);
+  }
+
+  .site-footer {
+    padding: var(--space-5) var(--space-4);
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-socials {
+    gap: var(--space-2);
+  }
+}
