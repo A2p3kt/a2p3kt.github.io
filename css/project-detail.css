@@ -144,6 +144,7 @@ html.dark .modal-stack .tag {
 
 .modal-footer {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-5);
   padding-top: var(--space-6);
   border-top: 1px solid var(--border);
@@ -153,11 +154,57 @@ html.dark .modal-stack .tag {
   font-size: var(--text-sm);
   color: var(--accent);
   text-decoration: none;
-  transition: color var(--duration-base) var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: color var(--duration-base) var(--ease),
+              transform var(--duration-fast) var(--ease),
+              box-shadow var(--duration-fast) var(--ease);
 }
 
 .modal-footer a:hover {
   color: var(--accent-hover);
+}
+
+.modal-live-link {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 10px 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-live-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.26) 45%, transparent 100%);
+  transform: translateX(-120%);
+  transition: transform 420ms var(--ease);
+}
+
+.modal-live-link:hover {
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(26, 82, 232, 0.3);
+}
+
+.modal-live-link:hover::before {
+  transform: translateX(120%);
+}
+
+.modal-live-link i {
+  transition: transform var(--duration-fast) var(--ease);
+}
+
+.modal-live-link:hover i:first-child {
+  transform: translateY(-1px) rotate(-10deg);
+}
+
+.modal-live-link:hover i:last-child {
+  transform: translateX(2px) translateY(-1px);
 }
 
 .modal-footer a.hidden {
@@ -169,15 +216,31 @@ html.dark .modal-stack .tag {
    ======================================== */
 
 @media (max-width: 640px) {
+  .modal-overlay {
+    align-items: flex-end;
+    justify-content: center;
+    padding: max(var(--space-3), env(safe-area-inset-top)) var(--space-3) max(var(--space-3), env(safe-area-inset-bottom));
+  }
+
   .modal-panel {
     border-radius: 12px 12px 0 0;
     align-self: flex-end;
-    max-height: 95vh;
+    max-height: calc(100dvh - max(var(--space-4), env(safe-area-inset-top)) - max(var(--space-3), env(safe-area-inset-bottom)));
     padding: var(--space-5);
+    margin-top: max(var(--space-4), env(safe-area-inset-top));
   }
 
   .modal-body {
     padding-right: 0;
+  }
+
+  .modal-footer {
+    gap: var(--space-3);
+  }
+
+  .modal-live-link {
+    width: 100%;
+    justify-content: center;
   }
 
   .modal-section h3 {

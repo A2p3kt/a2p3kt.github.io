@@ -1,0 +1,24 @@
+[
+  {
+    "id": "helsinki-event-aggregator",
+    "title": "Helsinki Event Aggregator",
+    "tagline": "Serverless API aggregating city event data across Helsinki.",
+    "stack": ["Python", "AsyncIO", "AWS Lambda", "API Gateway", "GitHub Actions"],
+    "problem": "Helsinki's event data lives across multiple fragmented city APIs. Fetching them serially caused load times exceeding 60 seconds.",
+    "solution": "Built a hybrid multi-threaded and asynchronous engine using Python asyncio and aiohttp. Concurrent fetching reduced total processing time to under 5 seconds.",
+    "architecture": "An AWS Lambda function is triggered via API Gateway. Async aiohttp sessions fan out to all upstream sources simultaneously. Results are normalized into a unified schema and returned. CI/CD via GitHub Actions.",
+    "github": "https://github.com/A2p3kt/helsinki-event-aggregator",
+    "live": "https://a2p3kt.github.io/events"
+  },
+  {
+    "id": "secure-file-api",
+    "title": "Secure File Submission API",
+    "tagline": "FastAPI backend with virus scanning for safe public file uploads.",
+    "stack": ["FastAPI", "Docker", "VirusTotal SDK", "Pydantic", "Resend"],
+    "problem": "Public-facing forms that accept file uploads without validation are a common attack vector for malware delivery.",
+    "solution": "A non-blocking FastAPI backend validates MIME types via Pydantic, submits files to VirusTotal's async API, and only triggers email delivery via Resend if the scan returns clean.",
+    "architecture": "FastAPI endpoint receives multipart upload -> Pydantic validates MIME type -> async VirusTotal scan -> conditional Resend email dispatch. Fully containerized with Docker.",
+    "github": "https://github.com/A2p3kt/fastapi-vt-mail",
+    "live": null
+  }
+]

@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toluwalase | Backend Engineer</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="shortcut icon" href="favicon_io/favicon.ico">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
@@ -13,7 +18,7 @@
 </head>
 <body>
     <nav id="site-nav" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="nav-brand">Toluwalase</a>
+        <a href="index.html" class="nav-brand">toluwalase.dev</a>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="projects.html">Projects</a>
@@ -29,8 +34,18 @@
                 </h1>
                 <p class="hero-sub">Backend and Data Engineering student building APIs, data pipelines, and cloud infrastructure in Helsinki, Finland.</p>
                 <div class="hero-links">
-                    <a href="projects.html">View Projects →</a>
-                    <a href="https://github.com/A2p3kt" target="_blank" rel="noopener">GitHub ↗</a>
+                    <p class="hero-connect-label">Connect with me</p>
+                    <div class="hero-social-row" aria-label="Social links">
+                        <a href="https://github.com/A2p3kt" target="_blank" rel="noopener" class="hero-social-link" aria-label="GitHub profile">
+                            <i class="fa-brands fa-github" aria-hidden="true"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/toluwalase-ayoola" target="_blank" rel="noopener" class="hero-social-link" aria-label="LinkedIn profile">
+                            <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+                    <a href="projects.html" class="hero-projects-link">Check out what I've been building →</a>
                 </div>
             </div>
             <figure class="hero-photo-wrap">
@@ -41,47 +56,18 @@
 
         <section class="skills" aria-labelledby="skills-title">
             <h2 id="skills-title">Core Skills</h2>
-            <div class="skills-list" role="list">
-                <span class="mono skill-tag" role="listitem">Python</span>
-                <span class="mono skill-tag" role="listitem">FastAPI</span>
-                <span class="mono skill-tag" role="listitem">Django</span>
-                <span class="mono skill-tag" role="listitem">SQL</span>
-                <span class="mono skill-tag" role="listitem">Database Design</span>
-                <span class="mono skill-tag" role="listitem">AWS Lambda</span>
-                <span class="mono skill-tag" role="listitem">API Design</span>
-                <span class="mono skill-tag" role="listitem">CI/CD</span>
-            </div>
+            <div class="skills-list" id="skills-list"></div>
         </section>
 
         <section id="timeline">
             <div class="timeline-group">
                 <h2 class="timeline-group-label">Education</h2>
-                <div class="timeline-container">
-                    <article class="timeline-card">
-                        <time class="mono" datetime="2025">2025 – 2028</time>
-                        <h3>ICT Infrastructure & Cloud Services</h3>
-                        <p class="institution">Haaga-Helia University of Applied Sciences</p>
-                        <p class="description">Bachelor's programme in cloud platforms, networking, and backend systems.</p>
-                    </article>
-                </div>
+                <div class="timeline-container" id="education-list"></div>
             </div>
 
             <div class="timeline-group">
                 <h2 class="timeline-group-label">Experience</h2>
-                <div class="timeline-container">
-                    <article class="timeline-card">
-                        <time class="mono" datetime="2024">2024 – Present</time>
-                        <h3>[Most Recent Role]</h3>
-                        <p class="institution">Company Name</p>
-                        <p class="description">One-line description of responsibilities.</p>
-                    </article>
-                    <article class="timeline-card">
-                        <time class="mono" datetime="2023">2023 – 2024</time>
-                        <h3>[Earlier Role]</h3>
-                        <p class="institution">Company Name</p>
-                        <p class="description">One-line description.</p>
-                    </article>
-                </div>
+                <div class="timeline-container" id="experience-list"></div>
             </div>
         </section>
 
@@ -104,7 +90,7 @@
             <a href="https://www.linkedin.com/in/toluwalase-ayoola" target="_blank" rel="noopener" aria-label="LinkedIn">
                 <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
             </a>
-            <a href="mailto:toluwaayo909@gmail.com" aria-label="Email">
+            <a href="mailto:hello@toluwalase.dev" aria-label="Email">
                 <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             </a>
         </div>

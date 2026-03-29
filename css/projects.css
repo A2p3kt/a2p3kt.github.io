@@ -8,17 +8,6 @@ main {
   padding: 0 var(--space-7);
 }
 
-main::before {
-  content: '';
-  display: block;
-  height: var(--space-8);
-  background: linear-gradient(90deg, var(--accent-soft) 0%, transparent 70%);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  margin-top: var(--space-6);
-  margin-bottom: var(--space-6);
-}
-
 main > h1 {
   font-family: 'DM Serif Display', serif;
   font-size: var(--text-3xl);
@@ -43,7 +32,7 @@ main > .subtitle {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-5);
-  margin-bottom: var(--space-10);
+  margin-bottom: var(--space-8);
 }
 
 .project-card {
@@ -138,6 +127,30 @@ main > .subtitle {
   border-color: var(--accent);
 }
 
+.projects-cta {
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-9);
+}
+
+.projects-cta h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: var(--text-2xl);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.projects-cta p {
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+}
+
+.projects-cta a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* ========================================
    RESPONSIVE
    ======================================== */
@@ -145,11 +158,6 @@ main > .subtitle {
 @media (max-width: 768px) {
   main {
     padding: 0 var(--space-4);
-  }
-
-  main::before {
-    margin-top: var(--space-4);
-    margin-bottom: var(--space-5);
   }
 
   main > h1 {

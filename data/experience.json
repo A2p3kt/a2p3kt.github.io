@@ -1,0 +1,16 @@
+[
+  {
+    "period": "2024 - Present",
+    "datetime": "2024",
+    "title": "Backend Engineering Projects",
+    "institution": "Independent / Academic Work",
+    "description": "Building backend APIs, serverless data pipelines, and cloud-ready systems with a focus on performance and reliability."
+  },
+  {
+    "period": "2023 - 2024",
+    "datetime": "2023",
+    "title": "Foundational Software Development",
+    "institution": "Self-Directed Learning",
+    "description": "Focused on Python, databases, and software engineering fundamentals through hands-on projects and iteration."
+  }
+]

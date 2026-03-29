@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Backend API Engineering",
+    "summary": "Design and build production-grade REST APIs with clear contracts, validation, and maintainable service boundaries.",
+    "capabilities": [
+      "Design resource-oriented endpoints and versioned API contracts",
+      "Implement auth-ready request validation with Pydantic and schema-first patterns",
+      "Document APIs with OpenAPI/Swagger for fast team onboarding"
+    ]
+  },
+  {
+    "title": "Data Modeling & SQL",
+    "summary": "Model relational data that stays consistent under real-world workloads and grows cleanly over time.",
+    "capabilities": [
+      "Normalize schemas and choose pragmatic denormalization where it improves performance",
+      "Write reliable SQL queries and optimize joins, indexes, and access patterns",
+      "Translate product requirements into storage and query strategies"
+    ]
+  },
+  {
+    "title": "Cloud & Serverless Systems",
+    "summary": "Ship lightweight, event-driven cloud services with observability and predictable deployment workflows.",
+    "capabilities": [
+      "Build serverless backends on AWS Lambda with API Gateway",
+      "Automate build and deployment pipelines with GitHub Actions",
+      "Structure cloud functions for low-latency cold-start-conscious execution"
+    ]
+  },
+  {
+    "title": "Python Web Frameworks",
+    "summary": "Use Python ecosystems effectively to move from idea to tested backend services quickly.",
+    "capabilities": [
+      "Develop asynchronous services in FastAPI and structured applications in Django",
+      "Create reusable modules, clean service layers, and testable routing logic",
+      "Integrate third-party APIs safely with timeout and retry-aware patterns"
+    ]
+  }
+]

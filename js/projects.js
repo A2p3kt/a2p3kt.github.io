@@ -1,40 +1,28 @@
-// =========================================
-// PROJECT DATA
-// =========================================
-
-const projects = [
-  {
-    id: "helsinki-event-aggregator",
-    title: "Helsinki Event Aggregator",
-    tagline: "Serverless API aggregating city event data across Helsinki.",
-    stack: ["Python", "AsyncIO", "AWS Lambda", "API Gateway", "GitHub Actions"],
-    problem: "Helsinki's event data lives across multiple fragmented city APIs. Fetching them serially caused load times exceeding 60 seconds.",
-    solution: "Built a hybrid multi-threaded and asynchronous engine using Python asyncio and aiohttp. Concurrent fetching reduced total processing time to under 5 seconds.",
-    architecture: "An AWS Lambda function is triggered via API Gateway. Async aiohttp sessions fan out to all upstream sources simultaneously. Results are normalized into a unified schema and returned. CI/CD via GitHub Actions.",
-    github: "https://github.com/A2p3kt/helsinki-event-aggregator",
-    live: null
-  },
-  {
-    id: "secure-file-api",
-    title: "Secure File Submission API",
-    tagline: "FastAPI backend with virus scanning for safe public file uploads.",
-    stack: ["FastAPI", "Docker", "VirusTotal SDK", "Pydantic", "Resend"],
-    problem: "Public-facing forms that accept file uploads without validation are a common attack vector for malware delivery.",
-    solution: "A non-blocking FastAPI backend validates MIME types via Pydantic, submits files to VirusTotal's async API, and only triggers email delivery via Resend if the scan returns clean.",
-    architecture: "FastAPI endpoint receives multipart upload → Pydantic validates MIME type → async VirusTotal scan → conditional Resend email dispatch. Fully containerized with Docker.",
-    github: "https://github.com/A2p3kt/fastapi-vt-mail",
-    live: null
-  }
-];
+let projects = [];
 
 // =========================================
 // INITIALIZE & RENDER
 // =========================================
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadProjects();
   renderProjectCards();
   initModal();
 });
+
+async function loadProjects() {
+  try {
+    const response = await fetch('data/projects.json');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch projects data: ${response.status}`);
+    }
+    const data = await response.json();
+    projects = Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error('Failed to load projects:', error);
+    projects = [];
+  }
+}
 
 function renderProjectCards() {
   const grid = document.getElementById('project-grid');
@@ -116,6 +104,9 @@ function openModal(projectId) {
   const project = projects.find(p => p.id === projectId);
   if (!project) return;
 
+  const overlay = document.getElementById('modal-overlay');
+  if (!overlay || !document.getElementById('modal-title')) return;
+
   // Populate modal fields
   const modalTitle = document.getElementById('modal-title');
   const modalTagline = document.getElementById('modal-tagline');
@@ -154,7 +145,6 @@ function openModal(projectId) {
   }
 
   // Open modal
-  const overlay = document.getElementById('modal-overlay');
   if (overlay) {
     overlay.setAttribute('aria-hidden', 'false');
     overlay.classList.add('open');

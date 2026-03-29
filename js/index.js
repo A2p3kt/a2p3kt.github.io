@@ -1,11 +1,80 @@
 // =========================================
-// TIMELINE SCROLL ANIMATION
+// DATA-DRIVEN HOMEPAGE RENDERING
 // =========================================
 
 document.addEventListener('DOMContentLoaded', () => {
-  initTimelineAnimation();
+  loadHomepageContent();
   initPhotoInteraction();
 });
+
+async function loadHomepageContent() {
+  try {
+    const [skills, education, experience] = await Promise.all([
+      fetchJSON('data/core-skills.json'),
+      fetchJSON('data/education.json'),
+      fetchJSON('data/experience.json')
+    ]);
+
+    renderSkills(skills);
+    renderTimeline('education-list', education);
+    renderTimeline('experience-list', experience);
+  } catch (error) {
+    console.error('Failed to load homepage content:', error);
+  } finally {
+    initTimelineAnimation();
+  }
+}
+
+async function fetchJSON(path) {
+  const response = await fetch(path);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${path}: ${response.status}`);
+  }
+  return response.json();
+}
+
+function renderSkills(skills) {
+  const skillsList = document.getElementById('skills-list');
+  if (!skillsList || !Array.isArray(skills)) return;
+
+  skillsList.innerHTML = skills
+    .map(skill => {
+      const capabilities = Array.isArray(skill.capabilities)
+        ? skill.capabilities.map(item => `<li>${item}</li>`).join('')
+        : '';
+
+      return `
+        <article class="skill-card">
+          <h3>${skill.title}</h3>
+          <p>${skill.summary}</p>
+          <ul class="skill-capabilities">
+            ${capabilities}
+          </ul>
+        </article>
+      `;
+    })
+    .join('');
+}
+
+function renderTimeline(containerId, entries) {
+  const container = document.getElementById(containerId);
+  if (!container || !Array.isArray(entries)) return;
+
+  container.innerHTML = entries
+    .map(entry => `
+      <article class="timeline-card">
+        <time class="mono" datetime="${entry.datetime || ''}">${entry.period || ''}</time>
+        <h3>${entry.title || ''}</h3>
+        <p class="institution">${entry.institution || ''}</p>
+        <p class="description">${entry.description || ''}</p>
+      </article>
+    `)
+    .join('');
+}
+
+// =========================================
+// TIMELINE SCROLL ANIMATION
+// =========================================
 
 function initTimelineAnimation() {
   const cards = document.querySelectorAll('.timeline-card');
