@@ -1,14 +1,18 @@
 [
   {
-    "period": "2025 - Present",
-    "datetime": "2025",
+    "period": "Sept 2025 - Present",
+    "datetime": "2025-09",
+    "startDate": "2025-09",
+    "endDate": "Present",
     "title": "Software Development Intern",
     "institution": "FIA Academics — Rochester NY, USA (Remote)",
     "description": "At my internship, I used Django to build backend services and ensure data stayed organized across the system. A highlight was building a financial aid comparison tool using government APIs—a project that taught me a lot about handling complex data mapping and real-time calculations"
   },
   {
-    "period": "2022 - 2025",
-    "datetime": "2022",
+    "period": "Jan 2022 - Dec 2024",
+    "datetime": "2022-01",
+    "startDate": "2022-01",
+    "endDate": "2024-12",
     "title": "Foundational Software Development",
     "institution": "Self-Directed Learning",
     "description": "Focused on Python, Web Development, databases, and software engineering fundamentals through hands-on projects and iteration."

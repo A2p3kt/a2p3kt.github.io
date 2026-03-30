@@ -1,7 +1,9 @@
 [
 	{
-		"period": "2025 - 2028",
-		"datetime": "2025",
+		"period": "Jan 2025 - Jul 2028",
+		"datetime": "2025-08",
+		"startDate": "2025-01",
+		"endDate": "2028-07",
 		"title": "Bachelor of Business Administration (BBA) in Business Information Technology",
 		"institution": "Haaga-Helia University of Applied Sciences, Helsinki, Finland",
 		"description": "Majoring in Cloud Services and ICT Infrastructure, with a strong interest in how data engineering and software development fit into the stack."

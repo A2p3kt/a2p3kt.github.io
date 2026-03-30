@@ -34,6 +34,31 @@ main {
   display: block;
 }
 
+.hero-typing {
+  display: inline-block;
+  min-height: 1.2em;
+}
+
+.hero-typing.is-typing::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 0.95em;
+  margin-left: 0.08em;
+  background: currentColor;
+  animation: typing-caret 0.7s steps(1, end) infinite;
+  vertical-align: -0.06em;
+}
+
+@keyframes typing-caret {
+  0%, 45% {
+    opacity: 1;
+  }
+  46%, 100% {
+    opacity: 0;
+  }
+}
+
 .hero-sub {
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
@@ -230,6 +255,63 @@ html.dark .hero-photo-wrap.is-active {
 }
 
 /* ========================================
+   CERTIFICATIONS SECTION
+   ======================================== */
+
+.certifications {
+  margin-bottom: var(--space-9);
+}
+
+.certifications h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: var(--text-2xl);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.certifications-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.cert-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.cert-issuer,
+.cert-description,
+.cert-id {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.cert-description {
+  margin-bottom: var(--space-3);
+}
+
+.cert-card .skill-capabilities {
+  margin-bottom: var(--space-3);
+}
+
+.cert-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--text-sm);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.cert-link:hover {
+  color: var(--accent-hover);
+}
+
+.cert-card-empty {
+  grid-column: 1 / -1;
+}
+
+/* ========================================
    TIMELINE SECTION
    ======================================== */
 
@@ -406,6 +488,10 @@ html.dark .quote-box {
   }
 
   .skills-list {
+    grid-template-columns: 1fr;
+  }
+
+  .certifications-list {
     grid-template-columns: 1fr;
   }
 
