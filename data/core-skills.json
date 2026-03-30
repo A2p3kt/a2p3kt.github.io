@@ -1,38 +1,38 @@
 [
   {
-    "title": "Backend API Engineering",
-    "summary": "Design and build production-grade REST APIs with clear contracts, validation, and maintainable service boundaries.",
+    "title": "Python Programming",
+    "summary": "As far as programming languages go, Python is my mother tongue. So far I have used it to:",
     "capabilities": [
-      "Design resource-oriented endpoints and versioned API contracts",
-      "Implement auth-ready request validation with Pydantic and schema-first patterns",
-      "Document APIs with OpenAPI/Swagger for fast team onboarding"
+      "Build fast services using FastAPI and keep apps organized with Django",
+      "Write code that is easy to reuse, keeping logic clean and separated",
+      "Connect external services to handle errors and retries gracefully"
     ]
   },
   {
-    "title": "Data Modeling & SQL",
-    "summary": "Model relational data that stays consistent under real-world workloads and grows cleanly over time.",
+    "title": "Backend Engineering",
+    "summary": "If Python is how I speak, then backend design is how I think. I build the hidden parts of an app that make sure everything stays stable. My focus includes:",
     "capabilities": [
-      "Normalize schemas and choose pragmatic denormalization where it improves performance",
-      "Write reliable SQL queries and optimize joins, indexes, and access patterns",
-      "Translate product requirements into storage and query strategies"
+      "Map out how data moves so other developers find the API easy to use",
+      "Check that data is valid and secure before it reaches the database",
+      "Create clear documentation so teams can start working with the code immediately"
     ]
   },
   {
-    "title": "Cloud & Serverless Systems",
-    "summary": "Ship lightweight, event-driven cloud services with observability and predictable deployment workflows.",
+    "title": "Data & Databases",
+    "summary": "I enjoy the logic of how data fits together. To me, a good database is one that stays organized even as it gets bigger. I have worked to:",
     "capabilities": [
-      "Build serverless backends on AWS Lambda with API Gateway",
-      "Automate build and deployment pipelines with GitHub Actions",
-      "Structure cloud functions for low-latency cold-start-conscious execution"
+      "Plan how tables relate to each other so the system stays fast as it grows",
+      "Write SQL that retrieves information efficiently without slowing things down",
+      "Turn a product idea into a plan for how to store and search for data"
     ]
   },
   {
-    "title": "Python Web Frameworks",
-    "summary": "Use Python ecosystems effectively to move from idea to tested backend services quickly.",
+    "title": "Cloud & Infrastructure",
+    "summary": "I like building systems that just work without needing constant attention. I prefer lightweight setups that stay predictable. I use these skills to:",
     "capabilities": [
-      "Develop asynchronous services in FastAPI and structured applications in Django",
-      "Create reusable modules, clean service layers, and testable routing logic",
-      "Integrate third-party APIs safely with timeout and retry-aware patterns"
+      "Run services on AWS that scale based on demand to keep costs low",
+      "Use GitHub Actions to move code to the cloud automatically",
+      "Optimize functions so they start up fast and respond without delay"
     ]
   }
 ]
