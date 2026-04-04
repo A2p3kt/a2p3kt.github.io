@@ -4,7 +4,7 @@
     "title": "Helsinki Event Aggregator",
     "tagline": "A faster way to pull together event data from across the city.",
     "stack": ["Python", "AsyncIO", "AWS Lambda", "API Gateway", "GitHub Actions"],
-    "problem": "Helsinki’s event data is spread across many different sources. Checking them one by one meant the app took over a minute to load.",
+    "problem": "Helsinki's event data is spread across many different sources. Checking them one by one meant the app took over a minute to load.",
     "solution": "I used Python to fetch data from every source at the same time. This dropped the wait time from 60 seconds to less than five.",
     "architecture": "An AWS Lambda function gathers and organizes the data as soon as it is requested. I also set up a workflow to handle updates and deployment automatically.",
     "github": "https://github.com/A2p3kt/helsinki-event-aggregator",

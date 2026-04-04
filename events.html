@@ -76,6 +76,34 @@
 
         .control-group { margin-bottom: 0.85rem; }
 
+        .custom-range {
+            display: none;
+            gap: 0.55rem;
+            margin-top: 0.55rem;
+        }
+
+        .custom-range.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .custom-range input[type="date"] {
+            width: 100%;
+            padding: 0.55rem 0.65rem;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-family: inherit;
+            color: var(--text);
+            background: var(--surface);
+        }
+
+        .custom-range input[type="date"]:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
         label {
             display: block; font-size: 0.65rem; font-weight: 700;
             color: var(--text-muted); margin-bottom: 0.35rem;
@@ -101,11 +129,6 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23a098b0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
             background-repeat: no-repeat; background-position: right 0.7rem center;
             padding-right: 2rem;
-        }
-
-        input[type="range"] {
-            width: 100%; accent-color: var(--primary);
-            cursor: pointer; height: 5px; border-radius: 4px;
         }
 
         .event-count {
@@ -468,8 +491,22 @@
             <input type="text" id="search" placeholder="Jazz, Food, Cinema...">
         </div>
         <div class="control-group">
-            <label>Timeframe &mdash; <span id="days-label">30</span> days ahead</label>
-            <input type="range" id="dateRange" min="1" max="30" value="30">
+            <label>Date Range</label>
+            <select id="datePreset">
+                <option value="today">Today</option>
+                <option value="tomorrow">Tomorrow</option>
+                <option value="this_week">This Week</option>
+                <option value="next_7_days" selected>Next 7 Days</option>
+                <option value="this_weekend">This Weekend</option>
+                <option value="this_month">This Month</option>
+                <option value="next_30_days">Next 30 Days</option>
+                <option value="all_upcoming">All Upcoming</option>
+                <option value="custom">Custom Range</option>
+            </select>
+            <div class="custom-range" id="customRange">
+                <input type="date" id="customStart" aria-label="Custom start date">
+                <input type="date" id="customEnd" aria-label="Custom end date">
+            </div>
         </div>
         <div class="control-group">
             <label>Category</label>
@@ -500,7 +537,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    const API_URL = 'https://kokz1rtalh.execute-api.eu-north-1.amazonaws.com/default/helsinki-event-aggregator';
+    const API_URL = 'https://kokz1rtalh.execute-api.eu-north-1.amazonaws.com/default/HelsinkiEventsConsumer';
     let allEvents = [];
     let map, markerGroup, markersMap = new Map();
 
@@ -519,6 +556,113 @@
         const h = parseInt(parts[0]);
         const m = parts[1];
         return `${h % 12 || 12}:${m} ${h >= 12 ? 'PM' : 'AM'}`;
+    }
+
+    function startOfDay(d) {
+        const date = new Date(d);
+        date.setHours(0, 0, 0, 0);
+        return date;
+    }
+
+    function endOfDay(d) {
+        const date = new Date(d);
+        date.setHours(23, 59, 59, 999);
+        return date;
+    }
+
+    function addDays(d, days) {
+        const date = new Date(d);
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+
+    function toDateInputValue(d) {
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    function parseEventDateTime(event) {
+        if (!event?.date) return null;
+        const iso = event.time ? `${event.date}T${event.time}` : `${event.date}T00:00:00`;
+        const dt = new Date(iso);
+        return Number.isNaN(dt.getTime()) ? null : dt;
+    }
+
+    function resolveDateWindow() {
+        const preset = document.getElementById('datePreset').value;
+        const now = new Date();
+        const todayStart = startOfDay(now);
+
+        if (preset === 'today') {
+            return { start: todayStart, end: endOfDay(todayStart) };
+        }
+
+        if (preset === 'tomorrow') {
+            const tomorrow = addDays(todayStart, 1);
+            return { start: tomorrow, end: endOfDay(tomorrow) };
+        }
+
+        if (preset === 'this_week') {
+            const day = todayStart.getDay();
+            const mondayOffset = day === 0 ? -6 : 1 - day;
+            const monday = addDays(todayStart, mondayOffset);
+            const sunday = addDays(monday, 6);
+            return { start: todayStart > monday ? todayStart : monday, end: endOfDay(sunday) };
+        }
+
+        if (preset === 'next_7_days') {
+            return { start: todayStart, end: endOfDay(addDays(todayStart, 6)) };
+        }
+
+        if (preset === 'this_weekend') {
+            const day = todayStart.getDay();
+            const saturdayOffset = day <= 6 ? (6 - day) : 0;
+            const saturday = addDays(todayStart, saturdayOffset);
+            const sunday = addDays(saturday, 1);
+            return { start: saturday, end: endOfDay(sunday) };
+        }
+
+        if (preset === 'this_month') {
+            const monthStart = new Date(todayStart.getFullYear(), todayStart.getMonth(), 1);
+            const monthEnd = new Date(todayStart.getFullYear(), todayStart.getMonth() + 1, 0);
+            return { start: todayStart > monthStart ? todayStart : monthStart, end: endOfDay(monthEnd) };
+        }
+
+        if (preset === 'next_30_days') {
+            return { start: todayStart, end: endOfDay(addDays(todayStart, 29)) };
+        }
+
+        if (preset === 'custom') {
+            const customStartVal = document.getElementById('customStart').value;
+            const customEndVal = document.getElementById('customEnd').value;
+            if (!customStartVal || !customEndVal) return null;
+
+            const start = startOfDay(new Date(customStartVal));
+            const end = endOfDay(new Date(customEndVal));
+            if (start > end) return null;
+            return { start, end };
+        }
+
+        return { start: todayStart, end: null };
+    }
+
+    function normalizeEvent(raw) {
+        const img = raw?.img_url;
+        return {
+            ...raw,
+            title: raw?.title || 'Untitled event',
+            date: raw?.date || '',
+            time: raw?.time || null,
+            description: raw?.description || 'No description provided.',
+            tags: Array.isArray(raw?.tags) ? raw.tags : [],
+            location: Array.isArray(raw?.location) && raw.location.length === 2
+                ? [Number(raw.location[0]), Number(raw.location[1])]
+                : null,
+            img_url: Array.isArray(img) ? img[0] : img,
+            venue: raw?.venue || 'TBA'
+        };
     }
 
     // Mobile sidebar
@@ -562,7 +706,9 @@
         try {
             const res = await fetch(API_URL);
             if (!res.ok) throw new Error("API Offline");
-            allEvents = await res.json();
+            const payload = await res.json();
+            const events = Array.isArray(payload) ? payload : (payload?.events || []);
+            allEvents = events.map(normalizeEvent);
 
             buildTags();
             updateUI();
@@ -592,19 +738,32 @@
     function updateUI() {
         const search = document.getElementById('search').value.toLowerCase();
         const tag = document.getElementById('tagFilter').value;
-        const daysLimit = parseInt(document.getElementById('dateRange').value);
-        document.getElementById('days-label').textContent = daysLimit;
-
-        const now = new Date();
-        const maxDate = new Date();
-        maxDate.setDate(now.getDate() + daysLimit);
+        const dateWindow = resolveDateWindow();
+        if (!dateWindow) {
+            document.getElementById('eventCount').textContent = 'Select a valid custom date range';
+            renderList([]);
+            renderMarkers([]);
+            return;
+        }
 
         const filtered = allEvents.filter(e => {
-            const eDate = new Date(e.date);
-            const matchesSearch = e.title.toLowerCase().includes(search);
+            const eventDateTime = parseEventDateTime(e);
+            const matchesSearch = (e.title || '').toLowerCase().includes(search);
             const matchesTag = tag === 'all' || (e.tags && e.tags.includes(tag));
-            const matchesDate = eDate >= new Date(now.setHours(0,0,0,0)) && eDate <= maxDate;
+            const matchesDate =
+                !!eventDateTime &&
+                eventDateTime >= dateWindow.start &&
+                (!dateWindow.end || eventDateTime <= dateWindow.end);
             return matchesSearch && matchesTag && matchesDate;
+        });
+
+        filtered.sort((a, b) => {
+            const aDt = parseEventDateTime(a);
+            const bDt = parseEventDateTime(b);
+            if (!aDt && !bDt) return 0;
+            if (!aDt) return 1;
+            if (!bDt) return -1;
+            return aDt - bDt;
         });
 
         document.getElementById('eventCount').textContent =
@@ -634,7 +793,7 @@
             card.id = `item-${idx}`;
             card.innerHTML = `
                 <div class="ev-date">${formatNiceDate(e.date)}</div>
-                <div class="ev-title">${e.title}</div>
+                <div class="ev-title">${e.title || 'Untitled event'}</div>
                 <div class="ev-venue">
                     <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
                     ${e.venue || 'TBA'}
@@ -676,7 +835,7 @@
         }
 
         document.getElementById('details-card').style.display = 'block';
-        document.getElementById('d-title').textContent = e.title;
+        document.getElementById('d-title').textContent = e.title || 'Untitled event';
         document.getElementById('d-date-time').textContent = `${formatNiceDate(e.date)}  \u2022  ${formatNiceTime(e.time)}`;
         document.getElementById('d-venue').textContent = e.venue || "Helsinki Venue";
         document.getElementById('d-desc').innerHTML = e.description || "No description provided.";
@@ -709,11 +868,30 @@
         document.querySelectorAll('.event-item').forEach(el => el.classList.remove('selected'));
     }
 
+    function setupDateFilterDefaults() {
+        const today = new Date();
+        const startInput = document.getElementById('customStart');
+        const endInput = document.getElementById('customEnd');
+        startInput.value = toDateInputValue(today);
+        endInput.value = toDateInputValue(addDays(today, 7));
+    }
+
+    function handleDatePresetChange() {
+        const preset = document.getElementById('datePreset').value;
+        const customRange = document.getElementById('customRange');
+        customRange.classList.toggle('active', preset === 'custom');
+        updateUI();
+    }
+
     let searchTimeout;
     searchInput.addEventListener('input', () => syncSearchInputs(searchInput));
     mobileSearchInput.addEventListener('input', () => syncSearchInputs(mobileSearchInput));
     document.getElementById('tagFilter').addEventListener('change', updateUI);
-    document.getElementById('dateRange').addEventListener('input', updateUI);
+    document.getElementById('datePreset').addEventListener('change', handleDatePresetChange);
+    document.getElementById('customStart').addEventListener('change', updateUI);
+    document.getElementById('customEnd').addEventListener('change', updateUI);
+
+    setupDateFilterDefaults();
 
     bootstrap();
 </script>
