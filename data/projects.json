@@ -2,44 +2,66 @@
   {
     "id": "helsinki-event-aggregator",
     "title": "Helsinki Event Aggregator",
-    "tagline": "A faster way to pull together event data from across the city.",
-    "stack": ["Python", "AsyncIO", "AWS Lambda", "API Gateway", "GitHub Actions"],
-    "problem": "Helsinki's event data is spread across many different sources. Checking them one by one meant the app took over a minute to load.",
-    "solution": "I used Python to fetch data from every source at the same time. This dropped the wait time from 60 seconds to less than five.",
-    "architecture": "An AWS Lambda function gathers and organizes the data as soon as it is requested. I also set up a workflow to handle updates and deployment automatically.",
+    "tagline": "A high-speed tool for gathering city-wide event data.",
+    "stack": [
+      "Python",
+      "AWS DynamoDB",
+      "AWS Lambda",
+      "API Gateway",
+      "GitHub Actions"
+    ],
+    "problem": "Helsinki's event information is scattered across multiple websites. Checking these sources one by one caused the app to take over a minute to load.",
+    "solution": "I built a system in Python that fetches data from all sources simultaneously.",
+    "architecture": "An AWS Lambda function processes and organizes data the moment a user requests it. I integrated an automated workflow to manage updates and deployment seamlessly.",
     "github": "https://github.com/A2p3kt/helsinki-event-aggregator",
     "live": "https://a2p3kt.github.io/events"
   },
   {
     "id": "secure-file-api",
     "title": "Secure File Submission API",
-    "tagline": "A secure way to handle file uploads without risking malware.",
-    "stack": ["FastAPI", "Docker", "VirusTotal SDK", "Pydantic", "Resend"],
-    "problem": "Public forms that let people upload files are a big security risk. Without a check, someone could easily upload a virus to the server.",
-    "solution": "I built a backend that automatically sends every uploaded file to be scanned for viruses. It only sends the file to the admin if it comes back clean.",
-    "architecture": "I used FastAPI to handle the uploads and VirusTotal to scan them in the background. It checks the file type and safety before sending it off via email. I also put everything in a Docker container for easy setup.",
+    "tagline": "A safe gateway for file uploads with integrated malware detection.",
+    "stack": [
+      "FastAPI",
+      "Docker",
+      "VirusTotal SDK",
+      "Pydantic",
+      "Resend"
+    ],
+    "problem": "Public upload forms are a major security risk, as they can be used to send malicious files or viruses directly to a server.",
+    "solution": "I created a backend that automatically scans every incoming file for threats. Files are only delivered to the administrator if they are verified as safe.",
+    "architecture": "Using FastAPI and the VirusTotal API, the system checks file types and safety levels in the background. The entire application is packaged in a Docker container for consistent setup and security.",
     "github": "https://github.com/A2p3kt/fastapi-vt-mail",
     "live": "https://fastapi-vt-mail-production.up.railway.app/docs"
   },
   {
     "id": "imdb-cli-app",
     "title": "IMDb CLI Manager",
-    "tagline": "A command-line tool for managing a personal movie and review database.",
-    "stack": ["Python", "MongoDB Atlas", "PyMongo", "python-dotenv"],
-    "problem": "I needed to understand how NoSQL databases work, and managing a movie collection can get messy, especially when you need to keep reviews and movie details in sync while using a cloud database.",
-    "solution": "I created a Python tool that connects to a cloud database. It handles adding movies, calculating average ratings, and making sure reviews are deleted if a movie is removed.",
-    "architecture": "The app connects to MongoDB Atlas using PyMongo. I built helper functions to keep the code clean and added logic to make sure the database stays organized when data is deleted.",
+    "tagline": "A command-line tool for organizing personal movie and review databases.",
+    "stack": [
+      "Python",
+      "MongoDB Atlas",
+      "PyMongo",
+      "python-dotenv"
+    ],
+    "problem": "Managing a growing movie collection while keeping reviews and film details synchronized in a cloud-based NoSQL database can be difficult.",
+    "solution": "This Python tool connects directly to a cloud database to handle entries, calculate average user ratings, and ensure data remains consistent when items are deleted.",
+    "architecture": "The application uses PyMongo to communicate with MongoDB Atlas. I designed logic to maintain database health, ensuring that when a movie is removed, its associated reviews are also cleared.",
     "github": "https://github.com/A2p3kt/pymongo-imdb-cli",
     "live": null
   },
   {
     "id": "social-network-django",
     "title": "Dynamic Social Network",
-    "tagline": "A social platform where users can post, follow, and interact in real-time.",
-    "stack": ["Django", "JavaScript", "Bootstrap", "SQLite"],
-    "problem": "I needed to learn how modern web development works because traditional web apps often feel slow because the whole page has to reload every time you like a post or add a comment.",
-    "solution": "I used JavaScript to handle likes and comments in the background. This makes the app feel fast because users don't have to wait for page reloads.",
-    "architecture": "The project combines a Django backend with JavaScript to update the feed without reloading. I also used Bootstrap to make sure it looks good on phones and computers.",
+    "tagline": "A responsive social platform for real-time posts and interactions.",
+    "stack": [
+      "Django",
+      "JavaScript",
+      "Bootstrap",
+      "SQLite"
+    ],
+    "problem": "Many web applications feel sluggish because the entire page reloads every time a user interacts with a post.",
+    "solution": "I used JavaScript to process likes and comments in the background. This allows the interface to update instantly, providing a much smoother experience for the user.",
+    "architecture": "This project uses Django for the core logic and JavaScript for a modern, reload-free interface. The layout is built with Bootstrap to ensure it works well on both mobile devices and desktop screens.",
     "github": "https://github.com/A2p3kt/social-network",
     "live": "https://a2p3kt.pythonanywhere.com/"
   }
