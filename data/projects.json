@@ -12,7 +12,7 @@
     ],
     "problem": "Helsinki's event information is scattered across multiple websites. Checking these sources one by one caused the app to take over a minute to load.",
     "solution": "I built a system in Python that fetches data from all sources simultaneously.",
-    "architecture": "An AWS Lambda function processes and organizes data the moment a user requests it. I integrated an automated workflow to manage updates and deployment seamlessly.",
+    "architecture": "The project uses a Producer-Consumer model on AWS. One Lambda function handles data ingestion and automatic TTL cleanup, while a second function serves the filtered API. GitHub Actions manages the automated deployment process.",
     "github": "https://github.com/A2p3kt/helsinki-event-aggregator",
     "live": "https://a2p3kt.github.io/events"
   },
