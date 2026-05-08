@@ -296,6 +296,17 @@
             box-shadow: 0 6px 20px rgba(108,60,224,0.35);
             filter: brightness(1.08);
         }
+        .detail-link.no-link {
+            background: linear-gradient(135deg, #a098b0 0%, #b8adcf 100%);
+            opacity: 0.65;
+            cursor: default;
+            pointer-events: none;
+        }
+        .detail-link.no-link:hover {
+            transform: none;
+            box-shadow: none;
+            filter: none;
+        }
 
         /* ─────── LOADER ─────── */
         .loading-screen {
@@ -558,6 +569,43 @@
         return `${h % 12 || 12}:${m} ${h >= 12 ? 'PM' : 'AM'}`;
     }
 
+    function formatNiceTimeWithTimezone(startTimeISO) {
+        if (!startTimeISO) return "";
+        
+        try {
+            const utcDate = new Date(startTimeISO);
+            
+            // Validate that the date is valid
+            if (!Number.isFinite(utcDate.getTime())) {
+                return "";
+            }
+            
+            // Convert to Eastern European Time
+            const formatter = new Intl.DateTimeFormat('en-GB', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true,
+                timeZone: 'Europe/Helsinki'
+            });
+            
+            const formatted = formatter.format(utcDate);
+            
+            // Determine if DST is active to show correct timezone name
+            const formatter2 = new Intl.DateTimeFormat('en-GB', {
+                timeZoneName: 'short',
+                timeZone: 'Europe/Helsinki'
+            });
+            const parts = formatter2.formatToParts(utcDate);
+            const tzNamePart = parts.find(p => p.type === 'timeZoneName');
+            const tzName = tzNamePart ? tzNamePart.value : 'Eastern European Time';
+            
+            return `${formatted} ${tzName}`;
+        } catch (err) {
+            console.error('Error formatting time:', err);
+            return "";
+        }
+    }
+
     function startOfDay(d) {
         const date = new Date(d);
         date.setHours(0, 0, 0, 0);
@@ -655,6 +703,7 @@
             title: raw?.title || 'Untitled event',
             date: raw?.date || '',
             time: raw?.time || null,
+            start_time: raw?.start_time || null,
             description: raw?.description || 'No description provided.',
             tags: Array.isArray(raw?.tags) ? raw.tags : [],
             location: Array.isArray(raw?.location) && raw.location.length === 2
@@ -836,11 +885,24 @@
 
         document.getElementById('details-card').style.display = 'block';
         document.getElementById('d-title').textContent = e.title || 'Untitled event';
-        document.getElementById('d-date-time').textContent = `${formatNiceDate(e.date)}  \u2022  ${formatNiceTime(e.time)}`;
+        // If start_time is present but only contains a date (no time), show "Time TBA"
+        const hasTimePiece = e.start_time && /T\d{2}:\d{2}/.test(e.start_time);
+        const timeDisplay = hasTimePiece ? formatNiceTimeWithTimezone(e.start_time) : '';
+        document.getElementById('d-date-time').textContent = `${formatNiceDate(e.date)}  \u2022  ${timeDisplay}`;
         document.getElementById('d-venue').textContent = e.venue || "Helsinki Venue";
         document.getElementById('d-desc').innerHTML = e.description || "No description provided.";
         document.getElementById('d-img').src = e.img_url || "https://via.placeholder.com/400x200?text=Helsinki+Event";
-        document.getElementById('d-link').href = e.signup_link || "#";
+        
+        const linkEl = document.getElementById('d-link');
+        if (e.signup_link) {
+            linkEl.href = e.signup_link;
+            linkEl.textContent = "View Full Event →";
+            linkEl.classList.remove('no-link');
+        } else {
+            linkEl.href = "javascript:void(0)";
+            linkEl.textContent = "✨ No signup link available";
+            linkEl.classList.add('no-link');
+        }
 
         const addrEl = document.getElementById('d-address');
         addrEl.textContent = "Locating address\u2026";
@@ -856,7 +918,7 @@
                 const area = a.suburb || a.neighbourhood || a.city_district || "";
                 const combined = road ? `${road} ${house}`.trim() : "";
                 addrEl.textContent = combined ? `${combined}, ${area}` : data.display_name.split(',').slice(0, 2).join(', ');
-            } catch { addrEl.textContent = "Helsinki, Finland"; }
+            } catch { addrEl.textContent = "Finland"; }
         } else {
             addrEl.textContent = "";
         }
