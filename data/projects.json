@@ -1,5 +1,22 @@
 [
   {
+    "id": "el-camino-la-rabida-explorer",
+    "title": "El Camino: La Rábida Explorer",
+    "tagline": "An interactive mapping application complementing physical architectural interventions.",
+    "stack": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Web Mapping",
+      "Cloudflare Pages"
+    ],
+    "problem": "An architecture team designed an elevated wooden walkway for the ecologically vulnerable La Rábida marshes, but needed a digital solution to visualize the route and provide visitors with contextual information.",
+    "solution": "We built a custom web application that renders the planned physical walkway directly onto live map tiles, integrating historical data and multimedia guides for surrounding landmarks.",
+    "architecture": "The application relies heavily on JavaScript for front-end interactivity, calculating and displaying interactive view cones to show exact lines of sight from the platform. The static assets are hosted and served globally using Cloudflare Pages.",
+    "github": "https://github.com/A2p3kt/el_camino",
+    "live": "https://el-camino.toluwaayo909.workers.dev"
+  },
+  {
     "id": "helsinki-event-aggregator",
     "title": "Helsinki Event Aggregator",
     "tagline": "A high-speed tool for gathering city-wide event data.",
