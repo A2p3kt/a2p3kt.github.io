@@ -1,38 +1,62 @@
 [
   {
-    "title": "Python Programming",
-    "summary": "As far as programming languages go, Python is my mother tongue. So far I have used it to:",
+    "title": "IT Support & Systems Administration",
+    "summary": "I'm comfortable being the person people come to when something isn't working. I've built that muscle through hands-on experience across operating systems and devices:",
     "capabilities": [
-      "Build fast services using FastAPI and keep apps organized with Django",
-      "Write code that is easy to reuse, keeping logic clean and separated",
-      "Connect external services to handle errors and retries gracefully"
+      "Set up, configure, and troubleshoot laptops and workstations across macOS, Windows, and Linux",
+      "Manage user accounts, groups, and permissions in Active Directory with Group Policy enforcement",
+      "Provision Windows Server environments via Azure and configure client workstations for domain joining",
+      "Support collaboration tools and meeting-room equipment to keep teams productive"
     ]
   },
   {
-    "title": "Backend Engineering",
-    "summary": "If Python is how I speak, then backend design is how I think. I build the hidden parts of an app that make sure everything stays stable. My focus includes:",
+    "title": "Networking & Connectivity",
+    "summary": "I understand how data moves across networks, from the physical layer to the application. Dedicated coursework gave me a solid grasp of:",
     "capabilities": [
-      "Map out how data moves so other developers find the API easy to use",
-      "Check that data is valid and secure before it reaches the database",
-      "Create clear documentation so teams can start working with the code immediately"
+      "IPv4 and IPv6 addressing, subnetting, and CIDR notation",
+      "Configuring switches, routers, and end devices using Cisco Packet Tracer",
+      "The OSI and TCP/IP models and how protocols interact across layers",
+      "Troubleshooting VPN, DNS, DHCP, and general connectivity issues"
     ]
   },
   {
-    "title": "Data & Databases",
-    "summary": "I enjoy the logic of how data fits together. To me, a good database is one that stays organized even as it gets bigger. I have worked to:",
+    "title": "Security & Access Management",
+    "summary": "Two dedicated security courses taught me to think about protection from both sides — what to defend and how attackers think:",
     "capabilities": [
-      "Plan how tables relate to each other so the system stays fast as it grows",
-      "Write SQL that retrieves information efficiently without slowing things down",
-      "Turn a product idea into a plan for how to store and search for data"
+      "Information security best practices, threat modelling, and risk assessment",
+      "Application hacking techniques using industry-standard penetration testing tools",
+      "Identity and access management, multi-factor authentication, and least-privilege principles",
+      "Security auditing, vulnerability analysis, and incident response fundamentals"
+    ]
+  },
+  {
+    "title": "Linux & Server Administration",
+    "summary": "Linux is where I feel most at home on the command line. I've gone well beyond coursework into running production services:",
+    "capabilities": [
+      "Fluent with the Linux CLI — file management, user/group permissions, process control, and system monitoring",
+      "Remote server management with SSH and secure file transfer via SFTP",
+      "Configured Apache web servers with SSL/TLS certificates (including Snakeoil for development)",
+      "Bash scripting and cron job automation for recurring maintenance tasks"
     ]
   },
   {
     "title": "Cloud & Infrastructure",
-    "summary": "I like building systems that just work without needing constant attention. I prefer lightweight setups that stay predictable. I use these skills to:",
+    "summary": "I work across multiple cloud platforms and enjoy the challenge of making services reliable and cost-effective:",
     "capabilities": [
-      "Run services on AWS that scale based on demand to keep costs low",
-      "Use GitHub Actions to move code to the cloud automatically",
-      "Optimize functions so they start up fast and respond without delay"
+      "Currently studying AWS cloud services in depth — EC2, S3, Lambda, IAM, and more",
+      "Provisioned and managed Windows Server instances on Azure",
+      "Self-hosted production services on Oracle Cloud Linux VMs with ongoing maintenance",
+      "CI/CD pipelines with GitHub Actions for automated deployments"
+    ]
+  },
+  {
+    "title": "Automation & AI",
+    "summary": "I believe the best IT support is the kind that prevents tickets from being filed in the first place. I build automations that do exactly that:",
+    "capabilities": [
+      "Design and maintain n8n automation workflows, self-hosted on a Linux VM I manage",
+      "Build AI-powered virtual agents using ElevenLabs and LLM integrations",
+      "Automate repetitive business processes to reduce manual workload",
+      "Integrate cloud services and APIs to create end-to-end automated pipelines"
     ]
   }
 ]

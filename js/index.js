@@ -68,12 +68,20 @@ function renderTimeline(containerId, entries) {
       const periodText = entry.period || formatPeriod(entry.startDate, entry.endDate);
       const datetimeValue = entry.datetime || entry.startDate || '';
 
+      const courseworkHTML = Array.isArray(entry.coursework) && entry.coursework.length
+        ? `<div class="timeline-coursework">
+             <p class="coursework-label"><strong>Key Coursework:</strong></p>
+             <ul>${entry.coursework.map(c => `<li>${c}</li>`).join('')}</ul>
+           </div>`
+        : '';
+
       return `
       <article class="timeline-card">
         <time class="mono" datetime="${datetimeValue}">${periodText}</time>
         <h3>${entry.title || ''}</h3>
         <p class="institution">${entry.institution || ''}</p>
         <p class="description">${entry.description || ''}</p>
+        ${courseworkHTML}
       </article>
     `;
     })

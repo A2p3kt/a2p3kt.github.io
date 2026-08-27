@@ -1,5 +1,39 @@
 [
   {
+    "id": "information-security-labs",
+    "title": "Information Security Labs",
+    "tagline": "Hands-on exploration of defensive security practices and industry-standard tools.",
+    "stack": [
+      "Linux (Ubuntu)",
+      "Security Tools",
+      "Vulnerability Analysis",
+      "Risk Assessment",
+      "Documentation"
+    ],
+    "problem": "Understanding information security requires more than theory — it demands hands-on practice with the tools and techniques used by professionals to protect real systems.",
+    "solution": "Through a structured course, I completed a series of practical labs covering security best practices, threat modelling, vulnerability analysis, and defence strategies. Each lab was thoroughly documented with findings and methodologies.",
+    "architecture": "All work was performed on Linux (Ubuntu) using industry-standard security tools. Each exercise focused on a different aspect of the security landscape, from network analysis to access control auditing, with detailed write-ups published on GitHub.",
+    "github": "https://github.com/A2p3kt/information-security",
+    "live": null
+  },
+  {
+    "id": "application-hacking-labs",
+    "title": "Application Hacking Labs",
+    "tagline": "Learning to think like an attacker to build stronger defences.",
+    "stack": [
+      "Linux (Ubuntu)",
+      "Penetration Testing",
+      "OWASP",
+      "Web Security",
+      "Ethical Hacking"
+    ],
+    "problem": "You cannot effectively defend a system if you don't understand how attackers exploit it. Application security requires an adversarial mindset.",
+    "solution": "I completed hands-on hacking exercises targeting web applications and systems, learning common attack vectors and exploitation techniques from the attacker's perspective — all within an ethical, controlled environment.",
+    "architecture": "The work covered OWASP Top 10 vulnerabilities, penetration testing methodologies, and exploitation of common web application weaknesses. All exercises were conducted on Linux with detailed analysis and remediation recommendations documented on GitHub.",
+    "github": "https://github.com/A2p3kt/application-hacking",
+    "live": null
+  },
+  {
     "id": "el-camino-la-rabida-explorer",
     "title": "El Camino: La Rábida Explorer",
     "tagline": "An interactive mapping application complementing physical architectural interventions.",

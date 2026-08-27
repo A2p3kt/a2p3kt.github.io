@@ -420,6 +420,44 @@ html.dark .timeline-card:hover {
   color: var(--text-secondary);
 }
 
+.timeline-coursework {
+  margin-top: var(--space-3);
+  padding-left: var(--space-2);
+  border-left: 2px solid var(--border);
+}
+
+.timeline-coursework .coursework-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.timeline-coursework ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+}
+
+.timeline-coursework li {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: var(--space-3);
+}
+
+.timeline-coursework li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent, #4a7cff);
+  font-size: var(--text-xs);
+}
+
 /* ========================================
    QUOTE BOX
    ======================================== */
