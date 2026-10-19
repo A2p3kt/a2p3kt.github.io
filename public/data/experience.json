@@ -1,0 +1,29 @@
+[
+  {
+    "period": "June 2026 - Present",
+    "datetime": "2026-06",
+    "startDate": "2026-06",
+    "endDate": "",
+    "title": "AI Automation Engineer",
+    "institution": "Purdie Analytics — Rochester NY, USA (Remote)",
+    "description": "Building and maintaining AI-powered automation workflows using n8n, self-hosted on an Oracle Cloud Linux VM that I provisioned, secured, and continue to maintain. Developing virtual AI agents with ElevenLabs and integrating LLMs into business processes to streamline operations."
+  },
+  {
+    "period": "Sept 2025 - Apr 2026",
+    "datetime": "2025-09",
+    "startDate": "2025-09",
+    "endDate": "2026-04",
+    "title": "Software Development Intern",
+    "institution": "FIA Academics — Rochester NY, USA (Remote)",
+    "description": "At my internship, I used Django to build backend services and ensure data stayed organized across the system. A highlight was building a financial aid comparison tool using government APIs—a project that taught me a lot about handling complex data mapping and real-time calculations."
+  },
+  {
+    "period": "Jan 2022 - Dec 2024",
+    "datetime": "2022-01",
+    "startDate": "2022-01",
+    "endDate": "2024-12",
+    "title": "Foundational Software Development",
+    "institution": "Self-Directed Learning",
+    "description": "Focused on Python, Web Development, databases, and software engineering fundamentals through hands-on projects and iteration."
+  }
+]

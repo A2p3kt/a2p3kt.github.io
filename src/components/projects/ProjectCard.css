@@ -1,0 +1,113 @@
+/* ========================================
+   PROJECT CARD STYLES
+   ======================================== */
+
+.project-card {
+  background: var(--surface);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--card-radius);
+  padding: var(--space-5);
+  cursor: pointer;
+  transition: transform var(--duration-base) var(--ease),
+              border-color var(--duration-base) var(--ease),
+              box-shadow var(--duration-base) var(--ease);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  width: 100%;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent-soft);
+  transition: background-color var(--duration-base) var(--ease);
+}
+
+[data-theme="brutalism"] .project-card::before {
+  width: 6px;
+  background: #ff5c00;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.project-card:hover::before {
+  background: var(--accent);
+}
+
+.project-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.project-title {
+  font-family: var(--heading-font);
+  font-size: var(--text-xl);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  padding-left: var(--space-3);
+}
+
+.project-tagline {
+  font-family: var(--body-font);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
+  padding-left: var(--space-3);
+  line-height: 1.5;
+}
+
+.project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding-left: var(--space-3);
+  margin-top: auto;
+}
+
+.project-stack .tag {
+  font-family: var(--mono-font);
+  font-size: var(--text-xs);
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  background: var(--accent-soft);
+  border: var(--border-width) solid var(--border);
+  border-radius: 999px;
+  padding: var(--space-1) var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  transition: background-color var(--duration-base) var(--ease),
+              border-color var(--duration-base) var(--ease),
+              color var(--duration-base) var(--ease);
+}
+
+[data-theme="brutalism"] .project-stack .tag {
+  border-radius: 0;
+  border: 1.5px solid #000;
+  background: #fff;
+  color: #000;
+}
+
+.project-stack .tag::before {
+  content: '•';
+  color: currentColor;
+  opacity: 0.75;
+}
+
+.project-card:hover .project-stack .tag {
+  background: var(--surface-alt);
+  border-color: var(--accent);
+}

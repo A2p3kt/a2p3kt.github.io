@@ -1,0 +1,21 @@
+[
+	{
+		"period": "Jan 2025 - Jul 2027 (Expected)",
+		"datetime": "2025-01",
+		"startDate": "2025-01",
+		"endDate": "2027-07",
+		"title": "Bachelor of Business Administration (BBA) in Business Information Technology",
+		"institution": "Haaga-Helia University of Applied Sciences, Helsinki, Finland",
+		"description": "Majoring in Cloud Services and ICT Infrastructure. On track to graduate in 2.5 years through accelerated credit completion.",
+		"coursework": [
+			"Information Security",
+			"Application Hacking",
+			"Linux Server Administration",
+			"Windows Server Administration",
+			"Introduction to Networks (Cisco)",
+			"Cloud Services (AWS)",
+			"Frontend Development with React",
+			"Backend Development with Spring Boot"
+		]
+	}
+]

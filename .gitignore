@@ -1,3 +1,27 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+dist-ssr
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.local
+
+# Personal docs (kept local)
 my_resume.docx-1.pdf
 Toluwalase_Ayoola_Cover_Letter.pdf
 Toluwalase_Ayoola_CV.pdf

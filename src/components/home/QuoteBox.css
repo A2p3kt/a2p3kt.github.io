@@ -1,0 +1,53 @@
+/* ========================================
+   QUOTE BOX STYLES
+   ======================================== */
+
+.quote-box {
+  max-width: 860px;
+  margin: var(--space-2) auto var(--space-9);
+  border-radius: var(--card-radius);
+  padding: var(--space-6);
+  background: var(--surface-alt);
+  border: var(--border-width) solid var(--border);
+  color: var(--text-primary);
+  box-shadow: var(--card-shadow);
+  transition: transform var(--duration-base) var(--ease),
+              border-color var(--duration-base) var(--ease);
+}
+
+.quote-mark {
+  font-size: var(--text-xl);
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+
+.quote-text {
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  margin-bottom: var(--space-2);
+  font-style: italic;
+}
+
+.quote-author {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.quote-note {
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  font-size: var(--text-xs);
+}
+
+@media (max-width: 640px) {
+  .quote-box {
+    padding: var(--space-5);
+    margin-bottom: var(--space-8);
+  }
+
+  .quote-text {
+    font-size: var(--text-base);
+  }
+}

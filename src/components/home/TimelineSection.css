@@ -1,0 +1,192 @@
+/* ========================================
+   TIMELINE SECTION STYLES
+   ======================================== */
+
+#timeline {
+  margin-top: var(--space-9);
+  padding-bottom: var(--space-5);
+}
+
+.timeline-group {
+  margin-bottom: var(--space-9);
+}
+
+.timeline-group:last-child {
+  margin-bottom: var(--space-4);
+}
+
+.timeline-group-label {
+  font-family: var(--heading-font);
+  font-size: var(--text-2xl);
+  color: var(--text-primary);
+  margin-bottom: var(--space-7);
+  position: relative;
+}
+
+.timeline-container {
+  position: relative;
+  padding-left: var(--space-7);
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--text-secondary);
+  opacity: 0.35;
+}
+
+[data-theme="brutalism"] .timeline-container::before {
+  width: 3px;
+  opacity: 1;
+  background-color: #000;
+}
+
+.timeline-card {
+  position: relative;
+  background: var(--surface);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--card-radius);
+  padding: var(--space-5);
+  max-width: 520px;
+  margin-bottom: var(--space-7);
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--duration-slow) var(--ease),
+              transform var(--duration-slow) var(--ease),
+              box-shadow var(--duration-base) var(--ease);
+  transition-delay: var(--delay, 0ms);
+}
+
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 24px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 4px var(--bg);
+}
+
+[data-theme="brutalism"] .timeline-card::before {
+  border-radius: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #ff5c00;
+  border: 2px solid #000;
+  box-shadow: none;
+}
+
+.timeline-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-card:hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+.timeline-card time {
+  font-family: var(--mono-font);
+  font-size: var(--text-xs);
+  color: var(--accent);
+  display: block;
+  margin-bottom: var(--space-3);
+  font-weight: 500;
+}
+
+.timeline-card h3 {
+  font-family: var(--heading-font);
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.timeline-card .institution {
+  font-family: var(--body-font);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-3);
+  font-weight: 500;
+}
+
+.timeline-card .description {
+  font-family: var(--body-font);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.timeline-coursework {
+  margin-top: var(--space-3);
+  padding-left: var(--space-2);
+  border-left: 2px solid var(--border);
+}
+
+[data-theme="brutalism"] .timeline-coursework {
+  border-left-width: 3px;
+  border-left-color: #000;
+}
+
+.timeline-coursework .coursework-label {
+  font-family: var(--body-font);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  margin-bottom: var(--space-1);
+}
+
+.timeline-coursework ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+}
+
+.timeline-coursework li {
+  font-family: var(--body-font);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: var(--space-3);
+}
+
+.timeline-coursework li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: var(--text-xs);
+}
+
+@media (max-width: 640px) {
+  .timeline-container {
+    padding-left: 54px;
+  }
+
+  .timeline-container::before {
+    left: 20px;
+  }
+
+  .timeline-card::before {
+    left: -34px;
+  }
+
+  .timeline-group-label {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-5);
+  }
+
+  .timeline-card {
+    max-width: 100%;
+    margin-bottom: var(--space-5);
+    padding: var(--space-4);
+  }
+}

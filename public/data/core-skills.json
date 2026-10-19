@@ -1,0 +1,62 @@
+[
+  {
+    "title": "IT Support & Systems Administration",
+    "summary": "I'm comfortable being the person people come to when something isn't working. I've built that muscle through hands-on experience across operating systems and devices:",
+    "capabilities": [
+      "Set up, configure, and troubleshoot laptops and workstations across macOS, Windows, and Linux",
+      "Manage user accounts, groups, and permissions in Active Directory with Group Policy enforcement",
+      "Provision Windows Server environments via Azure and configure client workstations for domain joining",
+      "Support collaboration tools and meeting-room equipment to keep teams productive"
+    ]
+  },
+  {
+    "title": "Networking & Connectivity",
+    "summary": "I understand how data moves across networks, from the physical layer to the application. Dedicated coursework gave me a solid grasp of:",
+    "capabilities": [
+      "IPv4 and IPv6 addressing, subnetting, and CIDR notation",
+      "Configuring switches, routers, and end devices using Cisco Packet Tracer",
+      "The OSI and TCP/IP models and how protocols interact across layers",
+      "Troubleshooting VPN, DNS, DHCP, and general connectivity issues"
+    ]
+  },
+  {
+    "title": "Security & Access Management",
+    "summary": "Two dedicated security courses taught me to think about protection from both sides — what to defend and how attackers think:",
+    "capabilities": [
+      "Information security best practices, threat modelling, and risk assessment",
+      "Application hacking techniques using industry-standard penetration testing tools",
+      "Identity and access management, multi-factor authentication, and least-privilege principles",
+      "Security auditing, vulnerability analysis, and incident response fundamentals"
+    ]
+  },
+  {
+    "title": "Linux & Server Administration",
+    "summary": "Linux is where I feel most at home on the command line. I've gone well beyond coursework into running production services:",
+    "capabilities": [
+      "Fluent with the Linux CLI — file management, user/group permissions, process control, and system monitoring",
+      "Remote server management with SSH and secure file transfer via SFTP",
+      "Configured Apache web servers with SSL/TLS certificates (including Snakeoil for development)",
+      "Bash scripting and cron job automation for recurring maintenance tasks"
+    ]
+  },
+  {
+    "title": "Cloud & Infrastructure",
+    "summary": "I work across multiple cloud platforms and enjoy the challenge of making services reliable and cost-effective:",
+    "capabilities": [
+      "Currently studying AWS cloud services in depth — EC2, S3, Lambda, IAM, and more",
+      "Provisioned and managed Windows Server instances on Azure",
+      "Self-hosted production services on Oracle Cloud Linux VMs with ongoing maintenance",
+      "CI/CD pipelines with GitHub Actions for automated deployments"
+    ]
+  },
+  {
+    "title": "Automation & AI",
+    "summary": "I believe the best IT support is the kind that prevents tickets from being filed in the first place. I build automations that do exactly that:",
+    "capabilities": [
+      "Design and maintain n8n automation workflows, self-hosted on a Linux VM I manage",
+      "Build AI-powered virtual agents using ElevenLabs and LLM integrations",
+      "Automate repetitive business processes to reduce manual workload",
+      "Integrate cloud services and APIs to create end-to-end automated pipelines"
+    ]
+  }
+]

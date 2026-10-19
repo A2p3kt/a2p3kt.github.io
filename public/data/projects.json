@@ -1,0 +1,119 @@
+[
+  {
+    "id": "information-security-labs",
+    "title": "Information Security Labs",
+    "tagline": "Hands-on exploration of defensive security practices and industry-standard tools.",
+    "stack": [
+      "Linux (Ubuntu)",
+      "Security Tools",
+      "Vulnerability Analysis",
+      "Risk Assessment",
+      "Documentation"
+    ],
+    "problem": "Understanding information security requires more than theory — it demands hands-on practice with the tools and techniques used by professionals to protect real systems.",
+    "solution": "Through a structured course, I completed a series of practical labs covering security best practices, threat modelling, vulnerability analysis, and defence strategies. Each lab was thoroughly documented with findings and methodologies.",
+    "architecture": "All work was performed on Linux (Ubuntu) using industry-standard security tools. Each exercise focused on a different aspect of the security landscape, from network analysis to access control auditing, with detailed write-ups published on GitHub.",
+    "github": "https://github.com/A2p3kt/information-security",
+    "live": null
+  },
+  {
+    "id": "application-hacking-labs",
+    "title": "Application Hacking Labs",
+    "tagline": "Learning to think like an attacker to build stronger defences.",
+    "stack": [
+      "Linux (Ubuntu)",
+      "Penetration Testing",
+      "OWASP",
+      "Web Security",
+      "Ethical Hacking"
+    ],
+    "problem": "You cannot effectively defend a system if you don't understand how attackers exploit it. Application security requires an adversarial mindset.",
+    "solution": "I completed hands-on hacking exercises targeting web applications and systems, learning common attack vectors and exploitation techniques from the attacker's perspective — all within an ethical, controlled environment.",
+    "architecture": "The work covered OWASP Top 10 vulnerabilities, penetration testing methodologies, and exploitation of common web application weaknesses. All exercises were conducted on Linux with detailed analysis and remediation recommendations documented on GitHub.",
+    "github": "https://github.com/A2p3kt/application-hacking",
+    "live": null
+  },
+  {
+    "id": "el-camino-la-rabida-explorer",
+    "title": "El Camino: La Rábida Explorer",
+    "tagline": "An interactive mapping application complementing physical architectural interventions.",
+    "stack": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Web Mapping",
+      "Cloudflare Pages"
+    ],
+    "problem": "An architecture team designed an elevated wooden walkway for the ecologically vulnerable La Rábida marshes, but needed a digital solution to visualize the route and provide visitors with contextual information.",
+    "solution": "We built a custom web application that renders the planned physical walkway directly onto live map tiles, integrating historical data and multimedia guides for surrounding landmarks.",
+    "architecture": "The application relies heavily on JavaScript for front-end interactivity, calculating and displaying interactive view cones to show exact lines of sight from the platform. The static assets are hosted and served globally using Cloudflare Pages.",
+    "github": "https://github.com/A2p3kt/el_camino",
+    "live": "https://el-camino.toluwaayo909.workers.dev"
+  },
+  {
+    "id": "helsinki-event-aggregator",
+    "title": "Helsinki Event Aggregator",
+    "tagline": "A high-speed tool for gathering city-wide event data.",
+    "stack": [
+      "Python",
+      "AWS DynamoDB",
+      "AWS Lambda",
+      "API Gateway",
+      "GitHub Actions"
+    ],
+    "problem": "Helsinki's event information is scattered across multiple websites. Checking these sources one by one caused the app to take over a minute to load.",
+    "solution": "I built a system in Python that fetches data from all sources simultaneously.",
+    "architecture": "The project uses a Producer-Consumer model on AWS. One Lambda function handles data ingestion and automatic TTL cleanup, while a second function serves the filtered API. GitHub Actions manages the automated deployment process.",
+    "github": "https://github.com/A2p3kt/helsinki-event-aggregator",
+    "live": "https://a2p3kt.github.io/events"
+  },
+  {
+    "id": "secure-file-api",
+    "title": "Secure File Submission API",
+    "tagline": "A safe gateway for file uploads with integrated malware detection.",
+    "stack": [
+      "FastAPI",
+      "Docker",
+      "VirusTotal SDK",
+      "Pydantic",
+      "Resend"
+    ],
+    "problem": "Public upload forms are a major security risk, as they can be used to send malicious files or viruses directly to a server.",
+    "solution": "I created a backend that automatically scans every incoming file for threats. Files are only delivered to the administrator if they are verified as safe.",
+    "architecture": "Using FastAPI and the VirusTotal API, the system checks file types and safety levels in the background. The entire application is packaged in a Docker container for consistent setup and security.",
+    "github": "https://github.com/A2p3kt/fastapi-vt-mail",
+    "live": "https://fastapi-vt-mail-production.up.railway.app/docs"
+  },
+  {
+    "id": "imdb-cli-app",
+    "title": "IMDb CLI Manager",
+    "tagline": "A command-line tool for organizing personal movie and review databases.",
+    "stack": [
+      "Python",
+      "MongoDB Atlas",
+      "PyMongo",
+      "python-dotenv"
+    ],
+    "problem": "Managing a growing movie collection while keeping reviews and film details synchronized in a cloud-based NoSQL database can be difficult.",
+    "solution": "This Python tool connects directly to a cloud database to handle entries, calculate average user ratings, and ensure data remains consistent when items are deleted.",
+    "architecture": "The application uses PyMongo to communicate with MongoDB Atlas. I designed logic to maintain database health, ensuring that when a movie is removed, its associated reviews are also cleared.",
+    "github": "https://github.com/A2p3kt/pymongo-imdb-cli",
+    "live": null
+  },
+  {
+    "id": "social-network-django",
+    "title": "Dynamic Social Network",
+    "tagline": "A responsive social platform for real-time posts and interactions.",
+    "stack": [
+      "Django",
+      "JavaScript",
+      "Bootstrap",
+      "SQLite"
+    ],
+    "problem": "Many web applications feel sluggish because the entire page reloads every time a user interacts with a post.",
+    "solution": "I used JavaScript to process likes and comments in the background. This allows the interface to update instantly, providing a much smoother experience for the user.",
+    "architecture": "This project uses Django for the core logic and JavaScript for a modern, reload-free interface. The layout is built with Bootstrap to ensure it works well on both mobile devices and desktop screens.",
+    "github": "https://github.com/A2p3kt/social-network",
+    "live": "https://a2p3kt.pythonanywhere.com/"
+  }
+]

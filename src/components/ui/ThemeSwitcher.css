@@ -1,0 +1,208 @@
+/* ========================================
+   THEME SWITCHER STYLES
+   ======================================== */
+
+.theme-switcher {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+}
+
+.theme-switcher-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--surface);
+  color: var(--text-primary);
+  border: var(--border-width) solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: var(--text-sm);
+  font-family: var(--body-font);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease);
+  box-shadow: var(--card-shadow);
+}
+
+.theme-switcher-btn:hover {
+  background: var(--surface-alt);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.theme-switcher-icon {
+  font-size: 0.9em;
+  color: var(--accent);
+  transition: transform var(--duration-fast) var(--ease);
+}
+
+.theme-switcher-label {
+  font-size: 0.88rem;
+  letter-spacing: 0.01em;
+}
+
+.theme-switcher-chevron {
+  font-size: 0.72em;
+  opacity: 0.7;
+  transition: transform var(--duration-fast) var(--ease);
+}
+
+.theme-switcher-chevron.open {
+  transform: rotate(180deg);
+}
+
+/* ─── Dropdown ─── */
+.theme-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 270px;
+  background: var(--surface);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--card-radius);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.16);
+  z-index: 1000;
+  padding: var(--space-2);
+  animation: dropdownFadeIn 0.18s var(--ease);
+}
+
+[data-theme="glass"] .theme-dropdown {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+[data-theme="brutalism"] .theme-dropdown {
+  box-shadow: 6px 6px 0 #000;
+  border-radius: 0;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.theme-dropdown-header {
+  padding: var(--space-2) var(--space-3) var(--space-1);
+  font-size: var(--text-xs);
+  font-family: var(--mono-font);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-1);
+}
+
+.theme-options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.theme-option-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: calc(var(--card-radius) - 4px);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease);
+}
+
+[data-theme="brutalism"] .theme-option-btn {
+  border-radius: 0;
+}
+
+.theme-option-btn:hover {
+  background: var(--surface-alt);
+}
+
+.theme-option-btn.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+/* Theme Color Dots */
+.theme-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="brutalism"] .theme-dot {
+  border-radius: 0;
+  border: 1.5px solid #000;
+}
+
+.theme-dot-light {
+  background: linear-gradient(135deg, #f5f8ff 50%, #1a52e8 50%);
+}
+
+.theme-dot-dark {
+  background: linear-gradient(135deg, #070d18 50%, #4d84ff 50%);
+}
+
+.theme-dot-retro {
+  background: linear-gradient(135deg, #faf3e0 50%, #d4740e 50%);
+}
+
+.theme-dot-cyberpunk {
+  background: linear-gradient(135deg, #0a0a14 50%, #00ffc8 50%);
+  box-shadow: 0 0 6px rgba(0, 255, 200, 0.4);
+}
+
+.theme-dot-glass {
+  background: linear-gradient(135deg, #e8edf5 50%, #6366f1 50%);
+}
+
+.theme-dot-brutalism {
+  background: linear-gradient(135deg, #fffbe6 50%, #ff5c00 50%);
+}
+
+.theme-option-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.theme-option-name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.theme-option-name i {
+  font-size: 0.85em;
+  color: var(--accent);
+}
+
+.check-icon {
+  margin-left: auto;
+  font-size: 0.75em;
+  color: var(--accent);
+}
+
+.theme-option-desc {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
