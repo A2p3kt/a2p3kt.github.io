@@ -190,3 +190,10 @@
     padding: var(--space-4);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

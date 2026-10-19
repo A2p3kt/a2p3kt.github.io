@@ -1,4 +1,5 @@
 import { useJsonData } from '../../hooks/useJsonData';
+import { Highlights } from './Highlights';
 import './SkillsSection.css';
 
 export function SkillsSection() {
@@ -27,13 +28,7 @@ export function SkillsSection() {
             <article key={skill.title || index} className="skill-card">
               <h3>{skill.title}</h3>
               <p>{skill.summary}</p>
-              {Array.isArray(skill.capabilities) && skill.capabilities.length > 0 && (
-                <ul className="skill-capabilities">
-                  {skill.capabilities.map((item, cIdx) => (
-                    <li key={cIdx}>{item}</li>
-                  ))}
-                </ul>
-              )}
+              <Highlights items={skill.capabilities} label="Key Capabilities" details />
             </article>
           ))}
         </div>

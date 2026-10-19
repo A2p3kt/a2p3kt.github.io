@@ -1,4 +1,5 @@
 import { useJsonData } from '../../hooks/useJsonData';
+import { Highlights } from './Highlights';
 import './CertificationsSection.css';
 
 export function CertificationsSection() {
@@ -30,13 +31,7 @@ export function CertificationsSection() {
               {cert.issuer && <p className="cert-issuer">{cert.issuer}</p>}
               {cert.description && <p className="cert-description">{cert.description}</p>}
 
-              {Array.isArray(cert.skillsLearned) && cert.skillsLearned.length > 0 && (
-                <ul className="skill-capabilities">
-                  {cert.skillsLearned.map((skill, sIdx) => (
-                    <li key={sIdx}>{skill}</li>
-                  ))}
-                </ul>
-              )}
+              <Highlights items={cert.skillsLearned} label="Skills Learned" />
 
               {cert.credentialId && (
                 <p className="cert-id mono">Credential ID: {cert.credentialId}</p>

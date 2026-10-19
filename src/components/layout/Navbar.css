@@ -27,11 +27,11 @@ nav#site-nav.scrolled {
 
 .nav-brand {
   font-family: var(--heading-font);
-  font-size: clamp(1.2rem, 1.4vw, 1.45rem);
+  font-size: 1.4rem;
   color: var(--text-primary);
   text-decoration: none;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   transition: color var(--duration-fast) var(--ease);
 }
 
@@ -102,4 +102,9 @@ nav#site-nav.scrolled {
   .nav-links a {
     font-size: var(--text-sm);
   }
+}
+
+@media (max-width: 440px) {
+  nav#site-nav { flex-wrap: wrap; gap: var(--space-3); }
+  .nav-links { width: 100%; justify-content: space-between; }
 }

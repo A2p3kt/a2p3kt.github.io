@@ -6,7 +6,13 @@
     "endDate": "",
     "title": "AI Automation Engineer",
     "institution": "Purdie Analytics — Rochester NY, USA (Remote)",
-    "description": "Building and maintaining AI-powered automation workflows using n8n, self-hosted on an Oracle Cloud Linux VM that I provisioned, secured, and continue to maintain. Developing virtual AI agents with ElevenLabs and integrating LLMs into business processes to streamline operations."
+    "summary": "Building AI-powered automations and virtual agents to streamline business operations.",
+    "highlights": [
+      "Build and maintain automation workflows with self-hosted n8n",
+      "Provision, secure, and maintain the Oracle Cloud Linux VM running the workflows",
+      "Develop virtual AI agents with ElevenLabs and integrate LLMs into business processes"
+    ],
+    "skills": ["n8n", "Oracle Cloud", "Linux administration", "ElevenLabs", "LLM integration"]
   },
   {
     "period": "Sept 2025 - Apr 2026",
@@ -15,7 +21,13 @@
     "endDate": "2026-04",
     "title": "Software Development Intern",
     "institution": "FIA Academics — Rochester NY, USA (Remote)",
-    "description": "At my internship, I used Django to build backend services and ensure data stayed organized across the system. A highlight was building a financial aid comparison tool using government APIs—a project that taught me a lot about handling complex data mapping and real-time calculations."
+    "summary": "Developed Django backend services and a financial aid comparison tool using government APIs.",
+    "highlights": [
+      "Built backend services with Django and organized data across the system",
+      "Connected government APIs to a financial aid comparison tool",
+      "Handled complex data mapping and real-time financial aid calculations"
+    ],
+    "skills": ["Django", "API integration", "Data mapping", "Real-time calculations"]
   },
   {
     "period": "Jan 2022 - Dec 2024",
@@ -24,6 +36,11 @@
     "endDate": "2024-12",
     "title": "Foundational Software Development",
     "institution": "Self-Directed Learning",
-    "description": "Focused on Python, Web Development, databases, and software engineering fundamentals through hands-on projects and iteration."
+    "summary": "Built a foundation in software development through hands-on projects and iteration.",
+    "highlights": [
+      "Practiced Python and web development through hands-on projects",
+      "Explored databases and software engineering fundamentals"
+    ],
+    "skills": ["Python", "Web development", "Databases", "Software engineering"]
   }
 ]

@@ -62,6 +62,9 @@ export function EventExplorer() {
   const [allEvents, setAllEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [nextToken, setNextToken] = useState(null);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState(null);
 
   // Filters state
   const [search, setSearch] = useState('');
@@ -74,15 +77,14 @@ export function EventExplorer() {
 
   // UI state
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // Fetch API events
+  // Fetch initial API events
   useEffect(() => {
     let isMounted = true;
     setLoading(true);
 
-    fetch(API_URL)
+    fetch(`${API_URL}?limit=50`)
       .then((res) => {
         if (!res.ok) throw new Error('API Offline');
         return res.json();
@@ -91,6 +93,7 @@ export function EventExplorer() {
         if (!isMounted) return;
         const events = Array.isArray(payload) ? payload : payload?.events || [];
         setAllEvents(events.map(normalizeEvent));
+        setNextToken(payload?.next_token || null);
         setError(null);
         setLoading(false);
       })
@@ -105,6 +108,42 @@ export function EventExplorer() {
       isMounted = false;
     };
   }, []);
+
+  // Fetch subsequent pages using next_token while keeping existing events
+  const handleLoadMore = useCallback(async () => {
+    if (!nextToken || loadingMore) return;
+
+    setLoadingMore(true);
+    setLoadMoreError(null);
+
+    try {
+      const url = `${API_URL}?limit=50&next_token=${encodeURIComponent(nextToken)}`;
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(`Server returned ${res.status}`);
+      }
+      const payload = await res.json();
+      const rawEvents = Array.isArray(payload) ? payload : payload?.events || [];
+      const normalized = rawEvents.map(normalizeEvent);
+
+      setAllEvents((prev) => {
+        const existingKeys = new Set(
+          prev.map((e) => e.id || `${e.title}-${e.date}-${e.time}`)
+        );
+        const uniqueIncoming = normalized.filter(
+          (e) => !existingKeys.has(e.id || `${e.title}-${e.date}-${e.time}`)
+        );
+        return [...prev, ...uniqueIncoming];
+      });
+
+      setNextToken(payload?.next_token || null);
+    } catch (err) {
+      console.error('Failed to load more events:', err);
+      setLoadMoreError('Unable to load more events. Please try again.');
+    } finally {
+      setLoadingMore(false);
+    }
+  }, [nextToken, loadingMore]);
 
   // Compute all available tags
   const allTags = useMemo(() => {
@@ -198,9 +237,17 @@ export function EventExplorer() {
     return filtered;
   }, [allEvents, search, tagFilter, dateWindow]);
 
-  const handleSelectEvent = useCallback((event, index) => {
+  // Dynamically compute selected index so it stays aligned even if filters change or new events are loaded
+  const selectedIndex = useMemo(() => {
+    if (!selectedEvent) return null;
+    const idx = filteredEvents.findIndex(
+      (e) => (e.id && e.id === selectedEvent.id) || e === selectedEvent
+    );
+    return idx >= 0 ? idx : null;
+  }, [selectedEvent, filteredEvents]);
+
+  const handleSelectEvent = useCallback((event) => {
     setSelectedEvent(event);
-    setSelectedIndex(index);
     if (window.innerWidth <= 680) {
       setIsSidebarOpen(false);
     }
@@ -208,7 +255,6 @@ export function EventExplorer() {
 
   const handleCloseDetails = useCallback(() => {
     setSelectedEvent(null);
-    setSelectedIndex(null);
   }, []);
 
   return (
@@ -271,6 +317,7 @@ export function EventExplorer() {
 
       <EventSidebar
         events={filteredEvents}
+        totalLoaded={allEvents.length}
         allTags={allTags}
         search={search}
         onSearchChange={setSearch}
@@ -286,6 +333,10 @@ export function EventExplorer() {
         onSelectEvent={handleSelectEvent}
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
+        hasMore={Boolean(nextToken)}
+        loadingMore={loadingMore}
+        loadMoreError={loadMoreError}
+        onLoadMore={handleLoadMore}
       />
 
       <EventMap

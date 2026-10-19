@@ -26,12 +26,6 @@ export function Navbar() {
         >
           Projects
         </NavLink>
-        <NavLink
-          to="/events"
-          className={({ isActive }) => (isActive ? 'active-link' : '')}
-        >
-          Events
-        </NavLink>
 
         <ThemeSwitcher />
       </div>

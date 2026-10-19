@@ -2,6 +2,7 @@ import { EventCard } from './EventCard';
 
 export function EventSidebar({
   events,
+  totalLoaded = 0,
   allTags,
   search,
   onSearchChange,
@@ -17,6 +18,10 @@ export function EventSidebar({
   onSelectEvent,
   isOpen,
   onClose,
+  hasMore = false,
+  loadingMore = false,
+  loadMoreError = null,
+  onLoadMore,
 }) {
   return (
     <aside className={`sidebar ${isOpen ? 'open' : ''}`} id="sidebar">
@@ -97,9 +102,16 @@ export function EventSidebar({
       </div>
 
       <div className="event-count" id="eventCount">
-        {events.length === 0
-          ? 'No events found'
-          : `${events.length} event${events.length !== 1 ? 's' : ''} found`}
+        <span>
+          {events.length === 0
+            ? 'No events match'
+            : `${events.length} event${events.length !== 1 ? 's' : ''} shown`}
+        </span>
+        {totalLoaded > 0 && (
+          <span className="event-count-total">
+            {events.length !== totalLoaded ? `(${totalLoaded} loaded)` : `(${totalLoaded} total)`}
+          </span>
+        )}
       </div>
 
       <div id="event-list" className="event-list">
@@ -107,9 +119,11 @@ export function EventSidebar({
           <div className="empty-state">
             <div className="empty-icon">🔍</div>
             <p>
-              No events match your filters.
+              No events match your current filters.
               <br />
-              Try a broader search or longer timeframe.
+              {hasMore
+                ? 'Try loading more events below or adjusting your filters.'
+                : 'Try a broader search or longer timeframe.'}
             </p>
           </div>
         ) : (
@@ -122,6 +136,56 @@ export function EventSidebar({
               onSelect={onSelectEvent}
             />
           ))
+        )}
+
+        {hasMore && (
+          <div className="load-more-section">
+            <button
+              type="button"
+              className="load-more-btn"
+              onClick={onLoadMore}
+              disabled={loadingMore}
+              aria-label="Load more events from AWS Lambda"
+            >
+              {loadingMore ? (
+                <>
+                  <span className="btn-spinner" aria-hidden="true"></span>
+                  <span>Loading more events...</span>
+                </>
+              ) : (
+                <>
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M12 5v14M5 12l7 7 7-7" />
+                  </svg>
+                  <span>Load More Events</span>
+                </>
+              )}
+            </button>
+            {loadMoreError && (
+              <div className="load-more-error" role="alert">
+                <span>{loadMoreError}</span>
+                <button type="button" onClick={onLoadMore} className="retry-btn">
+                  Retry
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {!hasMore && totalLoaded > 0 && (
+          <div className="all-loaded-notice">
+            <span>All {totalLoaded} events loaded</span>
+          </div>
         )}
       </div>
     </aside>

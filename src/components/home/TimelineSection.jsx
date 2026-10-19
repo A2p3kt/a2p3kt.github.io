@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useJsonData } from '../../hooks/useJsonData';
+import { Highlights } from './Highlights';
 import './TimelineSection.css';
 
 function formatPeriod(startDate, endDate) {
@@ -47,6 +48,11 @@ export function TimelineSection() {
       card.style.setProperty('--delay', `${index * 80}ms`);
     });
 
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      cards.forEach((card) => card.classList.add('visible'));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -57,12 +63,19 @@ export function TimelineSection() {
         });
       },
       {
-        threshold: 0.12,
-        rootMargin: '0px 0px -60px 0px',
+        threshold: 0.05,
+        rootMargin: '0px 0px 50px 0px',
       }
     );
 
-    cards.forEach((card) => observer.observe(card));
+    cards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        card.classList.add('visible');
+      } else {
+        observer.observe(card);
+      }
+    });
 
     return () => observer.disconnect();
   }, [education, experience]);
@@ -81,20 +94,10 @@ export function TimelineSection() {
           </time>
           <h3>{entry.title || ''}</h3>
           {entry.institution && <p className="institution">{entry.institution}</p>}
-          {entry.description && <p className="description">{entry.description}</p>}
-
-          {Array.isArray(entry.coursework) && entry.coursework.length > 0 && (
-            <div className="timeline-coursework">
-              <p className="coursework-label">
-                <strong>Key Coursework:</strong>
-              </p>
-              <ul>
-                {entry.coursework.map((c, cIdx) => (
-                  <li key={cIdx}>{c}</li>
-                ))}
-              </ul>
-            </div>
-          )}
+          {(entry.summary || entry.description) && <p className="description">{entry.summary || entry.description}</p>}
+          <Highlights items={entry.coursework} label="Key Coursework:" />
+          <Highlights items={entry.highlights} label="Key Contributions" details />
+          <Highlights items={entry.skills} label="Skills & Tools" />
         </article>
       );
     });
