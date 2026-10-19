@@ -6,10 +6,6 @@ on:
   push:
     branches: ['main']
 
-  # Runs build check when a Pull Request targets main
-  pull_request:
-    branches: ['main']
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -25,10 +21,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Single job that builds on PRs, and builds + deploys on push to main
+  # Single deploy job since we're just deploying
   deploy:
     environment:
-      name: ${{ github.event_name != 'pull_request' && 'github-pages' || '' }}
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
@@ -43,18 +39,13 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-
-      # --- Everything below only runs AFTER you merge to main ---
       - name: Setup Pages
-        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
       - name: Upload artifact
-        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
           # Upload dist folder
           path: './dist'
       - name: Deploy to GitHub Pages
-        if: github.event_name != 'pull_request'
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5
