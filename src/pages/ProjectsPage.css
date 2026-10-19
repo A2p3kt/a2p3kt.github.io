@@ -1,0 +1,65 @@
+/* ========================================
+   PROJECTS PAGE STYLES
+   ======================================== */
+
+.projects-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-7);
+}
+
+.projects-page > h1 {
+  font-family: var(--heading-font);
+  font-size: var(--text-3xl);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.projects-page > .subtitle {
+  font-family: var(--body-font);
+  font-weight: 300;
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-7);
+}
+
+.projects-cta {
+  border-top: var(--border-width) solid var(--border);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-9);
+}
+
+.projects-cta h2 {
+  font-family: var(--heading-font);
+  font-size: var(--text-2xl);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.projects-cta p {
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+}
+
+.projects-cta a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+
+.projects-cta a:hover {
+  color: var(--accent-hover);
+}
+
+@media (max-width: 768px) {
+  .projects-page {
+    padding: 0 var(--space-4);
+  }
+
+  .projects-page > h1 {
+    margin-top: var(--space-6);
+    font-size: var(--text-2xl);
+  }
+}

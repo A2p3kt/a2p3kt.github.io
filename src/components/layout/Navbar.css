@@ -1,0 +1,110 @@
+/* ========================================
+   NAVBAR STYLES
+   ======================================== */
+
+nav#site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) var(--space-7);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--duration-base) var(--ease),
+              border-color var(--duration-base) var(--ease),
+              box-shadow var(--duration-base) var(--ease);
+}
+
+nav#site-nav.scrolled {
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: var(--border-width) solid var(--border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.nav-brand {
+  font-family: var(--heading-font);
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0;
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.nav-brand:hover {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.nav-links a {
+  font-family: var(--body-font);
+  font-size: 0.98rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: none;
+  position: relative;
+  padding: 6px 10px;
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--duration-base) var(--ease),
+              background-color var(--duration-fast) var(--ease);
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.nav-links a.active-link {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.nav-links a.active-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background-color: var(--accent);
+  border-radius: 2px;
+}
+
+[data-theme="brutalism"] .nav-links a.active-link::after {
+  height: 3px;
+  border-radius: 0;
+}
+
+@media (max-width: 640px) {
+  nav#site-nav {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .nav-brand {
+    font-size: var(--text-lg);
+  }
+
+  .nav-links {
+    gap: var(--space-3);
+  }
+
+  .nav-links a {
+    font-size: var(--text-sm);
+  }
+}
+
+@media (max-width: 440px) {
+  nav#site-nav { flex-wrap: wrap; gap: var(--space-3); }
+  .nav-links { width: 100%; justify-content: space-between; }
+}

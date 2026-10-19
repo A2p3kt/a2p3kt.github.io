@@ -1,0 +1,79 @@
+/* ========================================
+   CERTIFICATIONS SECTION STYLES
+   ======================================== */
+
+.certifications {
+  margin-bottom: var(--space-9);
+}
+
+.certifications h2 {
+  font-family: var(--heading-font);
+  font-size: var(--text-2xl);
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.certifications-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.cert-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.cert-issuer,
+.cert-description,
+.cert-id {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.cert-description {
+  margin-bottom: var(--space-3);
+  line-height: 1.5;
+}
+
+.cert-card .skill-capabilities {
+  margin-bottom: var(--space-3);
+}
+
+.cert-link {
+  font-family: var(--body-font);
+  font-size: var(--text-sm);
+  color: var(--accent);
+  text-decoration: none;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.cert-link:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.cert-card-empty {
+  grid-column: 1 / -1;
+}
+
+.certs-loading {
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .certifications-list {
+    grid-template-columns: 1fr;
+  }
+}

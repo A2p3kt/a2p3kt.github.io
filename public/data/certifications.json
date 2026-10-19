@@ -1,0 +1,38 @@
+[
+	{
+		"title": "CS50x: Introduction to Computer Science",
+		"issuer": "Harvard University via edX",
+		"description": "A broad introduction to computer science fundamentals, from computational thinking and algorithms to web and software development through project-based learning.",
+		"skillsLearned": [
+			"Algorithm design and problem solving",
+			"C, Python, SQL, JavaScript, HTML, and CSS",
+			"Data structures and memory concepts",
+			"Software testing and debugging"
+		],
+		"credentialUrl": "https://cs50.harvard.edu/certificates/4b257d26-8e7e-4896-936e-400f33762bd4.png?size=letter"
+	},
+	{
+		"title": "CS50P: Introduction to Programming with Python",
+		"issuer": "Harvard University via edX",
+		"description": "A Python-focused course covering core programming concepts and practical software construction with strong emphasis on clean code and testing.",
+		"skillsLearned": [
+			"Python syntax and control flow",
+			"Functions, exceptions, and file I/O",
+			"Unit testing with pytest",
+			"Object-oriented programming basics"
+		],
+		"credentialUrl": "https://cs50.harvard.edu/certificates/b903c652-9144-48df-930e-bb8c6cfcd100.png?size=letter"
+	},
+	{
+		"title": "CS50AI: Introduction to Artificial Intelligence with Python",
+		"issuer": "Harvard University via edX",
+		"description": "An applied introduction to AI methods using Python, including search, optimization, probabilistic reasoning, machine learning, and neural networks.",
+		"skillsLearned": [
+			"State-space search and optimization",
+			"Knowledge representation and logic",
+			"Machine learning fundamentals",
+			"Neural networks and model evaluation"
+		],
+		"credentialUrl": "https://cs50.harvard.edu/certificates/0e06717a-5ef8-4dca-a23c-9a1be4689949.png?size=letter"
+	}
+]

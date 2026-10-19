@@ -1,0 +1,32 @@
+/* ========================================
+   PROJECT GRID STYLES
+   ======================================== */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+}
+
+.projects-status {
+  padding: var(--space-9) 0;
+  text-align: center;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  font-size: var(--text-base);
+}
+
+.projects-error {
+  color: #e53e3e;
+}
+
+@media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}

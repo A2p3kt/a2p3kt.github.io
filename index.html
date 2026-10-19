@@ -1,108 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Toluwalase Ayoola — IT professional curious about technology and how it all connects. Securing systems, managing infrastructure, automating workflows, and building software." />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+    <link rel="shortcut icon" href="/favicon_io/favicon.ico" />
+    <link rel="manifest" href="/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&family=Space+Mono:wght@400;700&family=Montserrat:wght@500;700;800&family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Toluwalase | Homepage</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
-    <link rel="shortcut icon" href="favicon_io/favicon.ico">
-    <link rel="manifest" href="favicon_io/site.webmanifest">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/index.css">
-</head>
-<body>
-    <nav id="site-nav" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="nav-brand">toluwalase.dev</a>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="projects.html">Projects</a>
-            <button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme"></button>
-        </div>
-    </nav>
 
-    <main>
-        <section class="hero">
-            <div class="hero-copy">
-                <h1>
-                    <span class="block hero-typing" data-text="Hey 👋🏾, I'm Toluwalase Ayoola">Hey 👋🏾, I'm Toluwalase Ayoola</span>
-                </h1>
-                <p class="hero-sub">Curious about technology and how it all connects.</p>
-                <p class="hero-sub">From securing systems and managing infrastructure to automating workflows and building software — I enjoy the challenge of making technology work reliably for the people who depend on it.</p>
-                <div class="hero-links">
-                    <p class="hero-connect-label">Connect with me</p>
-                    <div class="hero-social-row" aria-label="Social links">
-                        <a href="https://github.com/A2p3kt" target="_blank" rel="noopener" class="hero-social-link" aria-label="GitHub profile">
-                            <i class="fa-brands fa-github" aria-hidden="true"></i>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/toluwalase-ayoola" target="_blank" rel="noopener" class="hero-social-link" aria-label="LinkedIn profile">
-                            <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                            <span>LinkedIn</span>
-                        </a>
-                    </div>
-                    <a href="projects.html" class="hero-projects-link">Check out what I've been building →</a>
-                </div>
-            </div>
-            <figure class="hero-photo-wrap">
-                <img src="media/cv.jpg" alt="Portrait of Toluwalase" class="hero-photo">
-                <figcaption class="hero-photo-caption">yeah, that is what I look like</figcaption>
-            </figure>
-        </section>
-
-        <section class="skills" aria-labelledby="skills-title">
-            <h2 id="skills-title">Core Skills</h2>
-            <div class="skills-list" id="skills-list"></div>
-        </section>
-
-        <section class="certifications" aria-labelledby="certifications-title">
-            <h2 id="certifications-title">Certifications</h2>
-            <div class="certifications-list" id="certifications-list"></div>
-        </section>
-
-        <section id="timeline">
-            <div class="timeline-group">
-                <h2 class="timeline-group-label">Education</h2>
-                <div class="timeline-container" id="education-list"></div>
-            </div>
-
-            <div class="timeline-group">
-                <h2 class="timeline-group-label">Experience</h2>
-                <div class="timeline-container" id="experience-list"></div>
-            </div>
-        </section>
-
-        <section class="quote-box" aria-label="Personal quote">
-            <div class="quote-mark" aria-hidden="true">
-                <i class="fa-solid fa-quote-left"></i>
-            </div>
-            <p class="quote-text">"The problem with experts is that they know what can't be done."</p>
-            <p class="quote-author">— Henry Ford</p>
-            <p class="quote-note mono">Luckily, I don't have that problem yet.</p>
-        </section>
-    </main>
-
-    <footer class="site-footer" role="contentinfo">
-        <p>© 2026 Toluwalase Ayoola. All rights reserved.</p>
-        <div class="footer-socials" aria-label="Social links">
-            <a href="https://github.com/A2p3kt" target="_blank" rel="noopener" aria-label="GitHub">
-                <i class="fa-brands fa-github" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/toluwalase-ayoola" target="_blank" rel="noopener" aria-label="LinkedIn">
-                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-            </a>
-            <a href="mailto:hello@toluwalase.dev" aria-label="Email">
-                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-            </a>
-        </div>
-    </footer>
-
-    <script src="js/global.js"></script>
-    <script src="js/index.js"></script>
-</body>
+    <!-- SPA redirect restore script for GitHub Pages -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

@@ -1,0 +1,46 @@
+[
+  {
+    "period": "June 2026 - Present",
+    "datetime": "2026-06",
+    "startDate": "2026-06",
+    "endDate": "",
+    "title": "AI Automation Engineer",
+    "institution": "Purdie Analytics — Rochester NY, USA (Remote)",
+    "summary": "Building AI-powered automations and virtual agents to streamline business operations.",
+    "highlights": [
+      "Build and maintain automation workflows with self-hosted n8n",
+      "Provision, secure, and maintain the Oracle Cloud Linux VM running the workflows",
+      "Develop virtual AI agents with ElevenLabs and integrate LLMs into business processes"
+    ],
+    "skills": ["n8n", "Oracle Cloud", "Linux administration", "ElevenLabs", "LLM integration"]
+  },
+  {
+    "period": "Sept 2025 - Apr 2026",
+    "datetime": "2025-09",
+    "startDate": "2025-09",
+    "endDate": "2026-04",
+    "title": "Software Development Intern",
+    "institution": "FIA Academics — Rochester NY, USA (Remote)",
+    "summary": "Developed Django backend services and a financial aid comparison tool using government APIs.",
+    "highlights": [
+      "Built backend services with Django and organized data across the system",
+      "Connected government APIs to a financial aid comparison tool",
+      "Handled complex data mapping and real-time financial aid calculations"
+    ],
+    "skills": ["Django", "API integration", "Data mapping", "Real-time calculations"]
+  },
+  {
+    "period": "Jan 2022 - Dec 2024",
+    "datetime": "2022-01",
+    "startDate": "2022-01",
+    "endDate": "2024-12",
+    "title": "Foundational Software Development",
+    "institution": "Self-Directed Learning",
+    "summary": "Built a foundation in software development through hands-on projects and iteration.",
+    "highlights": [
+      "Practiced Python and web development through hands-on projects",
+      "Explored databases and software engineering fundamentals"
+    ],
+    "skills": ["Python", "Web development", "Databases", "Software engineering"]
+  }
+]
